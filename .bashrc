@@ -1,0 +1,1 @@
+alias nvm='node /Volumes/DATA/wechat-frame/node.js'
