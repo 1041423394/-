@@ -14,7 +14,7 @@ function prefixStream(prefixText) {
 
 function gulpAddRequireRuntime() {
     // 创建一个让每个文件通过的 stream 通道
-    return through.obj(function(file, enc, cb) {
+    return through.obj(function (file, enc, cb) {
         var prefixText = ``;
         var rel = path.relative(path.dirname(file.path), path.join(file.base, 'lib/runtime.js'));
         rel = rel.replace(/\\/g, '/');
@@ -46,7 +46,7 @@ gulp.task('compile', () => {
     return watch(['./src/**/*.js'], { ignoreInitial: false })
         .pipe(sourcemaps.init())
         .pipe(babel())
-       // .pipe(gulpAddRequireRuntime())
+        .pipe(gulpAddRequireRuntime())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('./dist'));
 });
@@ -54,7 +54,7 @@ gulp.task('compile', () => {
 gulp.task('scripts', () => {
     return gulp.src(['./src/**/*.js'])
         .pipe(babel())
-        //.pipe(gulpAddRequireRuntime())
+        .pipe(gulpAddRequireRuntime())
         .pipe(gulp.dest('./dist'));
 });
 
@@ -83,6 +83,11 @@ gulp.task('png', () => {
         .pipe(gulp.dest('./dist'));
 });
 
+gulp.task('gif', () => {
+    return gulp.src('./src/**/*.gif')
+        .pipe(gulp.dest('./dist'));
+});
+
 gulp.task('watch-css', () => {
     return watch('./src/**/*.wxss')
         .pipe(gulp.dest('./dist'));
@@ -108,16 +113,21 @@ gulp.task('watch-png', () => {
         .pipe(gulp.dest('./dist'));
 });
 
-gulp.task("clean", function() {
+gulp.task('watch-gif', () => {
+    return watch('./src/**/*.gif')
+        .pipe(gulp.dest('./dist'));
+});
+
+gulp.task("clean", function () {
     return gulp.src('./dist')
         .pipe(clean());
 });
 
-gulp.task('res', ['css', 'xml', 'json', 'jpg', 'png']);
+gulp.task('res', ['css', 'xml', 'json', 'jpg', 'png', 'gif']);
 
 
-gulp.task('build', ['clean'], function() {
-    gulp.start( 'scripts', 'res');
+gulp.task('build', ['clean'], function () {
+    gulp.start('scripts', 'res');
 });
 
 gulp.task('watch', [
@@ -127,5 +137,6 @@ gulp.task('watch', [
     'watch-json',
     'watch-jpg',
     'watch-png',
+    'watch-gif',
     'compile',
 ]);

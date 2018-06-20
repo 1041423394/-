@@ -28,47 +28,49 @@ var fml = {
     baseHost: 'https://world-cup.ishaohuo.cn/',
     projectName: 'wechat-frame',
     request: function (obj) {
-        let header = obj.method ? { 'content-type': 'application/x-www-form-urlencoded' } : {};
-        header = obj.header ? Object.assign(header, obj.header) : header;//对header进行扩展（可能在header中需要传递参数）
-        let params = {};
-        if (obj.data) {
-            params = rsaData ? RSAdata(obj.data) : obj.data;
-        }
-        wx.request({
-            url: fml.baseHost + obj.url,
-            data: params,
-            method: obj.method || 'GET',
-            header: header,
-            success: function (res) {
-                let data = res.data;
-                if (!data) {
-                    wx.showModal({
-                        title: '提示',
-                        showCancel: false,
-                        content: res.statusCode + ':' + res.errMsg
-                    })
-                    return
-                }
-                if (data.code == '00000') {
-                    obj.success(res)
-                } else {
+        return new Promise(function(resolve,reject){
+            let header = obj.method ? { 'content-type': 'application/x-www-form-urlencoded' } : {};
+            header = obj.header ? Object.assign(header, obj.header) : header;//对header进行扩展（可能在header中需要传递参数）
+            let params = {};
+            if (obj.data) {
+                params = rsaData ? RSAdata(obj.data) : obj.data;
+            }
+            wx.request({
+                url: fml.baseHost + obj.url,
+                data: params,
+                method: obj.method || 'GET',
+                header: header,
+                success: function (res) {
+                    let data = res.data;
+                    if (!data) {
+                        wx.showModal({
+                            title: '提示',
+                            showCancel: false,
+                            content: res.statusCode + ':' + res.errMsg
+                        })
+                        return
+                    }
+                    if (data.code == '00000') {
+                       resolve(res)
+                    } else {
+                        wx.showModal({
+                            title: fml.projectName + '提醒您',
+                            showCancel: false,
+                            content: data.msg ? data.msg : '错误码：' + data.code,
+                        })
+                    }
+                },
+                fail: function () {
                     wx.showModal({
                         title: fml.projectName + '提醒您',
                         showCancel: false,
-                        content: data.msg ? data.msg : '错误码：' + data.code,
+                        content: res.errMsg
                     })
+                },
+                complete: function () {
+    
                 }
-            },
-            fail: function () {
-                wx.showModal({
-                    title: fml.projectName + '提醒您',
-                    showCancel: false,
-                    content: res.errMsg
-                })
-            },
-            complete: function () {
-
-            }
+            })
         })
     }
 

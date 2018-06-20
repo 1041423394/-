@@ -1,0 +1,99 @@
+page{
+  line-height: 150%;
+  min-height: 100%;
+  background: #79d2d6;
+}
+.content{
+  padding-bottom: 500rpx;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(244,244,244,0)), color-stop(0.1, #f4f4f4), to(#f4f4f4));
+  opacity: 0;
+  transform: translate3d(0,100%,0);
+  animation: rise 3s cubic-bezier(0.19, 1, 0.22, 1) .25s forwards;
+}
+
+.fml-logo{
+  position:absolute;
+  top:-100rpx;
+  left:50%;
+  width:160rpx;
+  margin-left:-80rpx;
+  height:160rpx;
+  transition:all .35s ease;
+  border-radius:50%;
+  border:1px solid #fff;
+  overflow:hidden;
+  animation:sway 10s ease-in-out infinite;
+
+}
+.logo-img {
+  width:160rpx;
+  height:160rpx;
+  opacity:.95;
+}
+
+.fml-animate {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  animation: bd-rise 2s cubic-bezier(0.23,1,0.32,1) .75s forwards;
+  opacity: 0;
+}
+.fml-getUser {
+  font-size: 13pt;
+  line-height: 85rpx;
+  height: 85rpx;
+  background: #f4b1c6;
+  color: #fff;
+  text-align: center;
+  border-radius: 100rpx;
+  margin: 50% 20% 30% 20%;
+  width:auto;
+}
+.fml-getUser:active {
+  opacity: .8;
+}
+
+.fml-copyright {
+  font-size: 28rpx;
+  color: #999;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 30rpx;
+  text-align: center;
+}
+.fml-project{
+  color:#fff;
+  text-align: center;
+  position: fixed;
+  top:80rpx;
+}
+.project-name{
+  font-size:70rpx;
+  padding:20rpx 0;
+}
+.project-En{
+  font-size:30rpx;
+}
+
+@keyframes bd-rise{
+  from {opacity: 0; transform: translate3d(0,60rpx,0); }
+  to {opacity: 1; transform: translate3d(0,0,0); }
+}
+@keyframes sway{
+  0% {transform: translate3d(0,20rpx,0) rotate(-15deg); }
+  17% {transform: translate3d(0,0rpx,0) rotate(25deg); }
+  34% {transform: translate3d(0,-20rpx,0) rotate(-20deg); }
+  50% {transform: translate3d(0,-10rpx,0) rotate(15deg); }
+  67% {transform: translate3d(0,10rpx,0) rotate(-25deg); }
+  84% {transform: translate3d(0,15rpx,0) rotate(15deg); }
+  100% {transform: translate3d(0,20rpx,0) rotate(-15deg); }
+}
+@keyframes rise{
+  0% {opacity: 0;transform: translate3d(0,100%,0);}
+  50% {opacity: 1;}
+  100% {opacity: 1;transform: translate3d(0,450rpx,0);}
+}

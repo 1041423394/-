@@ -1,0 +1,5 @@
+<!-- 版本更新 -->
+<template name="dialog">
+    <view class="fml-modal animated fadeInDown"></view>
+    <view class="fml-dialog animated bounceInRight"></view>
+</template>

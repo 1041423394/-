@@ -1,0 +1,25 @@
+<view class="container">
+  <view class="fml-project">
+    <view class="project-name animated fadeInRight">WeChat-frame</view>
+    <view class="project-En animated fadeInLeft">Welcome to WeChat-frame</view>
+  </view>
+  <view class="content">
+    <view class="fml-logo" style="transform:rotateZ({{angle}}deg);">
+      <open-data type="userAvatarUrl" class="logo-img"></open-data>
+    </view>
+    <view class="fml-animate">
+      <view class="fml-project" style="color:#333;top:120rpx">
+        <view class="project-name" style="font-size:40rpx;">世界再大，一触即发</view>
+        <view class="project-En" style="font-size:28rpx;">The world is bigger and more likely</view>
+      </view>
+      <button class="fml-getUser" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
+        微信登录
+      </button>
+      <text class="fml-copyright">Copyright © 2018-06-20 风慕李</text>
+    </view>
+  </view>
+</view>
+<block wx:if="{{!canUse}}"> 
+  <import src="../template/template.wxml" />
+  <template is="dialog"></template>
+ </block>

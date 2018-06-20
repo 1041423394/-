@@ -7,19 +7,14 @@ let openid = wx.getStorageSync('openid') ? wx.getStorageSync('openid') : 'o3WtG4
 let Interface = {
   'answerRight': 'question/answer-questions'
 };
-let answerRight = function (obj) {
-  return new Promise(function (resolve, reject) {
-    fml.request({
-      header: {
-        'open-id': openid
-      },
-      url: Interface.answerRight,
-      data: obj.params,
-      method: 'POST',
-      success: function (res) {
-        resolve(res)
-      }
-    })
+let answerRight =function (obj) {
+  return  fml.request({
+    header: {
+      'open-id': openid
+    },
+    url: Interface.answerRight,
+    data: obj.params,
+    method: 'POST'
   })
 }
 module.exports = {
