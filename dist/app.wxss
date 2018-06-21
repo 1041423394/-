@@ -1,6 +1,6 @@
 /**app.wxss**/
 @import 'css/animate.wxss';
-
+@import 'css/template.wxss';
 page {
   font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
   font-size: 28rpx;

@@ -21,12 +21,13 @@ if (rsaData) {
  * request请求
  * @param {string} baseHost 项目域名
  * @param {string} projectName 项目名称
- * @param {function} wxPromisify promise对象
+ * @param {boolean} encryption 是否需要多端判定为同一用户
  * @param {function} request wx.request进行封装
  */
 var fml = {
     baseHost: 'https://world-cup.ishaohuo.cn/',
     projectName: 'wechat-frame',
+    encryption:false,
     request: function (obj) {
         return new Promise(function(resolve,reject){
             let header = obj.method ? { 'content-type': 'application/x-www-form-urlencoded' } : {};

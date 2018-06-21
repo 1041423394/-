@@ -1,5 +1,14 @@
 <!-- 版本更新 -->
-<template name="dialog">
-    <view class="fml-modal animated fadeInDown"></view>
-    <view class="fml-dialog animated bounceInRight"></view>
+<template name="dialog-default">
+    <view class="fml-modal animated fadeInDown {{dialog.closeStyle}}"></view>
+    <view class="fml-dialog-default animated fadeInRight {{dialog.closeStyle}}">
+        <view class="dialog-default-head">
+            <span class="iconfont {{dialog.icon}}" style="font-size:100rpx;"></span>
+        </view>
+        <view class="dialog-default-info">
+            <view class="default-info-title">{{dialog.title}}</view>
+            <view class="default-info-words">{{dialog.info}}</view>
+            <view class="dialog-default-btn" bindtap="closeDialog">{{dialog.btn}}</view>
+        </view>
+    </view>
 </template>

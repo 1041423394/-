@@ -1,18 +1,53 @@
-var app = getApp()
+let app = getApp()
+let projectService=require('../../service/projectRequest.js')
 Page({
   /**
    * 页面的初始数据
+   * @param {number} angle 头像运动角度
+   * @param {boolean} canIUse 是否支持用button.open-type的形式获取用户信息
+   * @param {object}  dialog 版本兼容弹窗相关信息
    */
   data: {
-    angle: 0,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    angle: 0,//
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    dialog:{
+      closeStyle:'',
+      icon:'icon-sorry',
+      title:'微信版本过低',
+      info:'请前往微信更新微信版本至最新，风里雨里我们在这里等你回来。',
+      btn:'好的'
+
+    }
   },
   /**
    * button 调出用户信息授权 1.3.0基础库支持，这里不做低版本兼容处理
    */
   getUserInfo: function (e) {
+    let userInfo=wx.getStorageSync('userInfo')
     app.globalData.userInfo = e.detail.userInfo
-    wx.setStorageSync('userInfo', e.detail.userInfo)
+
+    if(userInfo)return
+    wx.checkSession({
+      success:()=>{
+        let param={
+          encryptedData:e.detail.encryptedData,
+          iv:e.detail.iv,
+          code:app.globalData.code
+        }
+        let result=projectService.getOpenId({params:param})
+        wx.setStorageSync('userInfo', e.detail.userInfo)
+      },
+      fail:()=>{
+        
+      }
+    })
+   
+  },
+  /**
+   * 关闭弹窗
+   */
+  closeDialog:()=>{
+    wx.navigateBack()
   },
   /**
    * 生命周期函数--监听页面加载
@@ -22,7 +57,7 @@ Page({
       wx.redirectTo({
         url: '../index/index'
       })
-    } else{
+    } else if(this.data.canIUse){
       app.userInfoReadyCallback = res => {
         app.globalData.userInfo = res.userInfo
         wx.setStorageSync('userInfo', res.userInfo)
