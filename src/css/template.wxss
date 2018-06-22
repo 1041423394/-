@@ -18,7 +18,7 @@
   
   .icon-sorry:before { content: "\e670"; }
   
-  
+  /* 弹窗 */
 .fml-dialog-default{
     position: fixed;
     width:540rpx;
@@ -70,3 +70,27 @@
     margin-top:35rpx;
     border-radius: 0 0 20rpx 20rpx;
 }
+/* 提示语 */
+.empty{
+    position: fixed;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    -webkit-transform:translate(-50%,-50%);
+    -ms-transform:translate(-50%,-50%);
+    transform:translate(-50%,-50%);
+    z-index: 900;
+    text-align: center;
+    display: none;
+  }
+  .prompt{
+    background: rgba(0, 0, 0, 0.7);
+    width:400rpx;
+    padding:20rpx;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    border-radius: 10rpx;
+    color: #fff;
+  }

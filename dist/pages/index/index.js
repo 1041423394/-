@@ -1,52 +1,58 @@
 var regeneratorRuntime = require("../../lib/runtime.js");'use strict';
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var projectService = require('../../service/projectRequest.js');
-var app = getApp();
-
 Page({
-  data: {
-    userInfo: {},
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+  /**
+   * 页面的初始数据
+   */
+  data: {},
+  // 模块对应页面
+  tapHandle: function taohandle(e) {
+    var src = e.currentTarget.dataset.src;
+    wx.navigateTo({
+      url: '../' + src + '/' + src
+    });
   },
   /**
-   * 数据初始化
+   * 生命周期函数--监听页面加载
    */
-  initQuery: function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var param, result;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              param = {
-                answer_right_num: 3
-              };
-              _context.next = 3;
-              return projectService.answerRight({ params: param });
-
-            case 3:
-              result = _context.sent;
-
-              console.log(result.data);
-
-            case 5:
-            case 'end':
-              return _context.stop();
-          }
-        }
-      }, _callee, this);
-    }));
-
-    function initQuery() {
-      return _ref.apply(this, arguments);
+  onLoad: function onLoad(options) {
+    let wxUser=wx.getStorageSync('wxUser')
+    if(!wxUser){
+      wx.navigateTo({
+        url: '../login/login',
+       
+      })
     }
-
-    return initQuery;
-  }(),
-  onLoad: function onLoad() {
-    this.initQuery();
+  },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function onReady() {},
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function onHide() {},
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function onUnload() {},
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function onPullDownRefresh() {},
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function onReachBottom() {},
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function onShareAppMessage() {
+    return {
+      title: '小程序常用组件二次封装，开箱即用',
+      path: '/page/index/index',
+      imageUrl: '../../images/indexShare.png'
+    };
   }
 });
-//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBhZ2VzL2luZGV4L2luZGV4LmpzIl0sIm5hbWVzIjpbInByb2plY3RTZXJ2aWNlIiwicmVxdWlyZSIsImFwcCIsImdldEFwcCIsIlBhZ2UiLCJkYXRhIiwidXNlckluZm8iLCJjYW5JVXNlIiwid3giLCJpbml0UXVlcnkiLCJwYXJhbSIsImFuc3dlcl9yaWdodF9udW0iLCJhbnN3ZXJSaWdodCIsInBhcmFtcyIsInJlc3VsdCIsImNvbnNvbGUiLCJsb2ciLCJvbkxvYWQiXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSxJQUFJQSxpQkFBZUMsUUFBUSxpQ0FBUixDQUFuQjtBQUNBLElBQU1DLE1BQU1DLFFBQVo7O0FBRUFDLEtBQUs7QUFDSEMsUUFBTTtBQUNKQyxjQUFVLEVBRE47QUFFSkMsYUFBU0MsR0FBR0QsT0FBSCxDQUFXLDhCQUFYO0FBRkwsR0FESDtBQUtIOzs7QUFHQUU7QUFBQSx1RUFBVTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFDSkMsbUJBREksR0FDRTtBQUNSQyxrQ0FBaUI7QUFEVCxlQURGO0FBQUE7QUFBQSxxQkFJU1gsZUFBZVksV0FBZixDQUEyQixFQUFDQyxRQUFPSCxLQUFSLEVBQTNCLENBSlQ7O0FBQUE7QUFJSkksb0JBSkk7O0FBS05DLHNCQUFRQyxHQUFSLENBQVlGLE9BQU9ULElBQW5COztBQUxNO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLEtBQVY7O0FBQUE7QUFBQTtBQUFBOztBQUFBO0FBQUEsS0FSRztBQWVIWSxVQUFRLGtCQUFZO0FBQ2xCLFNBQUtSLFNBQUw7QUFDRDtBQWpCRSxDQUFMIiwiZmlsZSI6InBhZ2VzL2luZGV4L2luZGV4LmpzIiwic291cmNlc0NvbnRlbnQiOlsibGV0IHByb2plY3RTZXJ2aWNlPXJlcXVpcmUoJy4uLy4uL3NlcnZpY2UvcHJvamVjdFJlcXVlc3QuanMnKVxuY29uc3QgYXBwID0gZ2V0QXBwKClcblxuUGFnZSh7XG4gIGRhdGE6IHtcbiAgICB1c2VySW5mbzoge30sXG4gICAgY2FuSVVzZTogd3guY2FuSVVzZSgnYnV0dG9uLm9wZW4tdHlwZS5nZXRVc2VySW5mbycpXG4gIH0sXG4gIC8qKlxuICAgKiDmlbDmja7liJ3lp4vljJZcbiAgICovXG4gIGluaXRRdWVyeTphc3luYyBmdW5jdGlvbigpe1xuICAgIGxldCBwYXJhbT17XG4gICAgICBhbnN3ZXJfcmlnaHRfbnVtOjNcbiAgICB9XG4gICAgbGV0IHJlc3VsdD1hd2FpdCBwcm9qZWN0U2VydmljZS5hbnN3ZXJSaWdodCh7cGFyYW1zOnBhcmFtfSlcbiAgICAgIGNvbnNvbGUubG9nKHJlc3VsdC5kYXRhKVxuICB9LFxuICBvbkxvYWQ6IGZ1bmN0aW9uICgpIHtcbiAgICB0aGlzLmluaXRRdWVyeSgpXG4gIH1cbn0pXG5cblxuIl19
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBhZ2VzL2luZGV4L2luZGV4LmpzIl0sIm5hbWVzIjpbIlBhZ2UiLCJkYXRhIiwidGFvaGFuZGxlIiwiZSIsInNyYyIsImN1cnJldFRhcmdldCIsImRhdGFzZXQiLCJ3eCIsIm5hdmlnYXRlVG8iLCJ1cmwiLCJvbkxvYWQiLCJvcHRpb25zIiwib25SZWFkeSIsIm9uSGlkZSIsIm9uVW5sb2FkIiwib25QdWxsRG93blJlZnJlc2giLCJvblJlYWNoQm90dG9tIiwib25TaGFyZUFwcE1lc3NhZ2UiLCJ0aXRsZSIsInBhdGgiLCJpbWFnZVVybCJdLCJtYXBwaW5ncyI6Ijs7QUFBQUEsS0FBSztBQUNIOzs7QUFHQUMsUUFBTSxFQUpIO0FBTUg7QUFDQUMsYUFBVSxtQkFBVUMsQ0FBVixFQUFZO0FBQ3BCLFFBQUlDLE1BQUlELEVBQUVFLFlBQUYsQ0FBZUMsT0FBZixDQUF1QkYsR0FBL0I7QUFDQUcsT0FBR0MsVUFBSCxDQUFjO0FBQ1pDLFdBQUssT0FBS0wsR0FBTCxHQUFTLEdBQVQsR0FBYUE7QUFETixLQUFkO0FBR0QsR0FaRTtBQWFIOzs7QUFHQU0sVUFBUSxnQkFBVUMsT0FBVixFQUFtQixDQUMxQixDQWpCRTtBQWtCSDs7O0FBR0FDLFdBQVMsbUJBQVksQ0FFcEIsQ0F2QkU7QUF3Qkg7OztBQUdBQyxVQUFRLGtCQUFZLENBRW5CLENBN0JFO0FBOEJIOzs7QUFHQUMsWUFBVSxvQkFBWSxDQUVyQixDQW5DRTtBQW9DSDs7O0FBR0FDLHFCQUFtQiw2QkFBWSxDQUU5QixDQXpDRTtBQTBDSDs7O0FBR0FDLGlCQUFlLHlCQUFZLENBRTFCLENBL0NFO0FBZ0RIOzs7QUFHQUMscUJBQW1CLDZCQUFZO0FBQzdCLFdBQU87QUFDTEMsYUFBTyxrQkFERjtBQUVMQyxZQUFNLG1CQUZEO0FBR0xDLGdCQUFTO0FBSEosS0FBUDtBQUtEO0FBekRFLENBQUwiLCJmaWxlIjoicGFnZXMvaW5kZXgvaW5kZXguanMiLCJzb3VyY2VzQ29udGVudCI6WyJQYWdlKHtcbiAgLyoqXG4gICAqIOmhtemdoueahOWIneWni+aVsOaNrlxuICAgKi9cbiAgZGF0YToge1xuICB9LFxuICAvLyDmqKHlnZflr7nlupTpobXpnaJcbiAgdGFvaGFuZGxlOmZ1bmN0aW9uIChlKXtcbiAgICBsZXQgc3JjPWUuY3VycmV0VGFyZ2V0LmRhdGFzZXQuc3JjXG4gICAgd3gubmF2aWdhdGVUbyh7XG4gICAgICB1cmw6ICcuLycrc3JjKycvJytzcmNcbiAgICB9KVxuICB9LFxuICAvKipcbiAgICog55Sf5ZG95ZGo5pyf5Ye95pWwLS3nm5HlkKzpobXpnaLliqDovb1cbiAgICovXG4gIG9uTG9hZDogZnVuY3Rpb24gKG9wdGlvbnMpIHtcbiAgfSxcbiAgLyoqXG4gICAqIOeUn+WRveWRqOacn+WHveaVsC0t55uR5ZCs6aG16Z2i5Yid5qyh5riy5p+T5a6M5oiQXG4gICAqL1xuICBvblJlYWR5OiBmdW5jdGlvbiAoKSB7XG5cbiAgfSxcbiAgLyoqXG4gICAqIOeUn+WRveWRqOacn+WHveaVsC0t55uR5ZCs6aG16Z2i6ZqQ6JePXG4gICAqL1xuICBvbkhpZGU6IGZ1bmN0aW9uICgpIHtcblxuICB9LFxuICAvKipcbiAgICog55Sf5ZG95ZGo5pyf5Ye95pWwLS3nm5HlkKzpobXpnaLljbjovb1cbiAgICovXG4gIG9uVW5sb2FkOiBmdW5jdGlvbiAoKSB7XG5cbiAgfSxcbiAgLyoqXG4gICAqIOmhtemdouebuOWFs+S6i+S7tuWkhOeQhuWHveaVsC0t55uR5ZCs55So5oi35LiL5ouJ5Yqo5L2cXG4gICAqL1xuICBvblB1bGxEb3duUmVmcmVzaDogZnVuY3Rpb24gKCkge1xuXG4gIH0sXG4gIC8qKlxuICAgKiDpobXpnaLkuIrmi4nop6blupXkuovku7bnmoTlpITnkIblh73mlbBcbiAgICovXG4gIG9uUmVhY2hCb3R0b206IGZ1bmN0aW9uICgpIHtcblxuICB9LFxuICAvKipcbiAgICog55So5oi354K55Ye75Y+z5LiK6KeS5YiG5LqrXG4gICAqL1xuICBvblNoYXJlQXBwTWVzc2FnZTogZnVuY3Rpb24gKCkge1xuICAgIHJldHVybiB7XG4gICAgICB0aXRsZTogJ+Wwj+eoi+W6j+W4uOeUqOe7hOS7tuS6jOasoeWwgeijhe+8jOW8gOeuseWNs+eUqCcsXG4gICAgICBwYXRoOiAnL3BhZ2UvaW5kZXgvaW5kZXgnLFxuICAgICAgaW1hZ2VVcmw6Jy4uLy4uL2ltYWdlcy9pbmRleFNoYXJlLnBuZydcbiAgICB9XG4gIH1cbn0pXG5cbiJdfQ==

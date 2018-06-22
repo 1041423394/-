@@ -1,5 +1,6 @@
 let app = getApp()
-let projectService=require('../../service/projectRequest.js')
+let projectService = require('../../service/projectRequest.js')
+let common=require('../../utils/util.js')
 Page({
   /**
    * 页面的初始数据
@@ -10,44 +11,47 @@ Page({
   data: {
     angle: 0,//
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    dialog:{
-      closeStyle:'',
-      icon:'icon-sorry',
-      title:'微信版本过低',
-      info:'请前往微信更新微信版本至最新，风里雨里我们在这里等你回来。',
-      btn:'好的'
-
+    dialog: {
+      closeStyle: '',
+      icon: 'icon-sorry',
+      title: '微信版本过低',
+      info: '请前往微信更新微信版本至最新，风里雨里我们在这里等你回来。',
+      btn: '好的'
+    },
+    tips: {
+      hiddenErrmsg: true,
+      errmsg: '',
     }
   },
   /**
    * button 调出用户信息授权 1.3.0基础库支持，这里不做低版本兼容处理
    */
   getUserInfo: function (e) {
-    let userInfo=wx.getStorageSync('userInfo')
-    app.globalData.userInfo = e.detail.userInfo
+    if (!e.detail.userInfo) {
+      common.TIP.showErrMsg(this,'请允许微信授权')
+      return
+    }
+    let userInfo = wx.getStorageSync('userInfo')
+    if (userInfo) return
 
-    if(userInfo)return
-    wx.checkSession({
-      success:()=>{
-        let param={
-          encryptedData:e.detail.encryptedData,
-          iv:e.detail.iv,
-          code:app.globalData.code
-        }
-        let result=projectService.getOpenId({params:param})
-        wx.setStorageSync('userInfo', e.detail.userInfo)
-      },
-      fail:()=>{
-        
-      }
-    })
-   
+    // encryptedData此处就是为了获取uionid
+    let param = {
+      // nickName:e.detail.userInfo.nickName,
+      // avatarUrl:e.detail.userInfo.avatarUrl,
+      encryptedData: e.detail.encryptedData,
+      iv: e.detail.iv,
+      code: app.globalData.code
+    }
+    app.checkSession(param,e.detail.userInfo)
+
   },
   /**
    * 关闭弹窗
    */
-  closeDialog:()=>{
-    wx.navigateBack()
+  closeDialog: function () {
+    wx.navigateBack({
+      delta: 0
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -57,18 +61,19 @@ Page({
       wx.redirectTo({
         url: '../index/index'
       })
-    } else if(this.data.canIUse){
+    } else if (this.data.canIUse) {
       app.userInfoReadyCallback = res => {
         app.globalData.userInfo = res.userInfo
         wx.setStorageSync('userInfo', res.userInfo)
       }
-    } 
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
     wx.onAccelerometerChange(function (res) {
+      console.log(res)
       var angle = -(res.x * 30).toFixed(1);
       if (angle > 14) { angle = 14; }
       else if (angle < -14) { angle = -14; }

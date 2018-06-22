@@ -2,6 +2,7 @@ page{
   line-height: 150%;
   min-height: 100%;
   background: #79d2d6;
+  overflow: hidden;
 }
 .content{
   padding-bottom: 500rpx;

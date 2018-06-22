@@ -19,7 +19,8 @@
     </view>
   </view>
 </view>
+<import src="../template/template.wxml" />
 <block wx:if="{{!canIUse}}"> 
-  <import src="../template/template.wxml" />
   <template is="dialog-default" data="{{dialog}}"></template>
  </block>
+<template is="tips" data="{{tips}}"></template>

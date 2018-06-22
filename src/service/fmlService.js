@@ -21,7 +21,6 @@ if (rsaData) {
  * request请求
  * @param {string} baseHost 项目域名
  * @param {string} projectName 项目名称
- * @param {boolean} encryption 是否需要多端判定为同一用户
  * @param {function} request wx.request进行封装
  */
 var fml = {

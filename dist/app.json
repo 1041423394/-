@@ -1,8 +1,19 @@
 {
   "pages":[
+    "pages/index/index",
     "pages/login/login",
-    "pages/index/index"
-   
+    "pages/addrList/addrList",
+    "pages/canvasToSave/canvasToSave",
+    "pages/bgMusic/bgMusic",
+    "pages/cityFilter/cityFilter",
+    "pages/fleshLoad/fleshLoad",
+    "pages/longTapVoice/longTapVoice",
+    "pages/shopCart/shopCart",
+    "pages/sowingMap/sowingMap",
+    "pages/subwayTicket/subwayTicket",
+    "pages/uploadOss/uploadOss",
+    "pages/timeSlot/timeSlot",
+    "pages/uploadImg/uploadImg"
 
   ],
   "window":{

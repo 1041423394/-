@@ -12,3 +12,7 @@
         </view>
     </view>
 </template>
+<!--提示语-->
+<template name="tips">
+    <view hidden="{{tips.hiddenErrmsg}}" class="empty prompt">{{tips.errmsg}}</view>
+</template>
