@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class="fml-model">
+<view class="fml-model animated slideInRight">
   <view class="fml-flex-cloumn fml-model-head ">
     <open-data type="userAvatarUrl" class="logo-img animated zoomIn" ></open-data>
     <open-data type="userNickName" class="animated zoomIn"></open-data>
@@ -21,10 +21,12 @@
       <icon type="download" size="30" color="#79d2d6" class="animated zoomIn"/>
       <span>上传到oss</span>
     </view>
-    <view class="fml-index fml-flex-cloumn" bindtap="tapHandle" data-src="uploadOss">
+     <view class="fml-index fml-flex-cloumn" bindtap="tapHandle" data-src="switchCity">
       <icon type="download" size="30" color="#79d2d6" class="animated zoomIn"/>
-      <span>上传图片</span>
+      <span>城市过滤</span>
     </view>
+    
+    
     <view class="fml-index fml-flex-cloumn" bindtap="tapHandle" data-src="fleshLoad">
       <icon type="download" size="30" color="#79d2d6" class="animated zoomIn"/>
       <span>刷新及加载</span>
@@ -37,17 +39,13 @@
       <icon type="download" size="30" color="#79d2d6" class="animated zoomIn"/>
       <span>地址列表</span>
     </view>
-    <view class="fml-index fml-flex-cloumn" bindtap="tapHandle" data-src="cityFilter">
+     <view class="fml-index fml-flex-cloumn" bindtap="tapHandle" data-src="addrEdit">
       <icon type="download" size="30" color="#79d2d6" class="animated zoomIn"/>
-      <span>城市过滤</span>
+      <span>地址编辑</span>
     </view>
     <view class="fml-index fml-flex-cloumn" bindtap="tapHandle" data-src="timeSlot">
       <icon type="download" size="30" color="#79d2d6" class="animated zoomIn"/>
       <span>时间段</span>
-    </view>
-    <view class="fml-index fml-flex-cloumn" bindtap="tapHandle" data-src="sowingMap">
-      <icon type="download" size="30" color="#79d2d6" class="animated zoomIn"/>
-      <span>轮播图</span>
     </view>
     <view class="fml-index fml-flex-cloumn" bindtap="tapHandle" data-src="subwayTicket">
       <icon type="download" size="30" color="#79d2d6" class="animated zoomIn"/>

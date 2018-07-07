@@ -1,0 +1,73 @@
+page {
+    background: #f5f5f5
+}
+
+view {
+    box-sizing: border-box;
+}
+
+.storeNotice-item {
+    padding: 20rpx 40rpx;
+}
+
+.storeNotice-item:first-child {
+    font-size: 32rpx;
+}
+
+.starStore-list {
+    flex-wrap: wrap;
+}
+
+.starStore-list {
+    padding: 20rpx 10rpx;
+}
+
+.starStore-listItem {
+    width: 50%;
+    margin-bottom: 20rpx;
+    padding: 0 10rpx;
+}
+
+.starStore-img {
+    overflow: hidden;
+}
+
+.starStore-img image {
+    width: 100%;
+    background-color: #e8e8e8;
+    border: none;
+    height: 320rpx;
+}
+
+.listItem-proName {
+    font-size: 29rpx;
+    padding: 18rpx 0;
+    overflow: hidden;
+}
+
+.listItem-proInfo {
+    color: #9b9b9f;
+    font-size: 28rpx;
+    overflow: hidden;
+}
+
+.proInfo-item {
+    font-size: 25rpx;
+    height: 60rpx;
+    vertical-align: top;
+}
+
+.starStore-product {
+    padding-bottom: 25rpx;
+    background: #fff;
+}
+
+.starStore-proInfo {
+    padding: 0 10rpx;
+}
+
+.fml-price {
+    color: #fb6267;
+    font-size: 32rpx;
+    padding-top: 18rpx;
+}

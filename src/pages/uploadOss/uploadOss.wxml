@@ -1,0 +1,12 @@
+ <view class="fml-choosePre">
+     <view class="choosePre-imageList" wx:for="{{imageArray}}" wx:key="item">
+         <view class="choosePre-image animated zoomIn">
+             <image src="{{item}}" catchtap="previewImage" data-src="{{item}}"></image>
+         </view>
+         <icon type="clear" size="16" catchtap="delImage" class="choosePre-delImage" data-index="{{index}}" />
+     </view>
+     <view class="choosePre-imgAdd" catchtap="chooseImage">+</view>
+ </view>
+ <view class="commit-btn text-center" bindtap="uploadHandle">上传图片至阿里oss</view>
+ <import src="../template/template.wxml" />
+ <template is="tips" data="{{tips}}"></template>

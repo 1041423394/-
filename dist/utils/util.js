@@ -1,47 +1,161 @@
-var regeneratorRuntime = require("../lib/runtime.js");'use strict';
-
+let app = getApp()
 var common = {
-  // 提示工具
-  TIP: {
-    showErrMsg: function showErrMsg(pageObj, errmsg) {
-      pageObj.setData({
-        tips: {
-          hiddenErrmsg: false,
-          errmsg: errmsg
+    // 获取当前位置
+    getLocation() {
+        let wxGetLocation = this.wxPromisify(wx.getLocation)
+        wxGetLocation().then(res => {
+            let location = {
+                lat: res.latitude,
+                lng: res.longitude
+            }
+            return location
+        })
+    },
+    //根据时间戳获取时间对象
+    getLocalTime: function(nS) {
+        return new Date(parseInt(nS));
+    },
+    //字符串补足位数
+    strPad: function(str, length, pad_str, pad_type) {
+        var str = str.toString()
+        if (!length) {
+            length = 2
+        }
+        if (!pad_str) {
+            pad_str = '0'
+        }
+        if (!pad_type) {
+            pad_type = 'left'
         }
 
-      });
-      //3秒后关闭
-      setTimeout(this.returnCloseErrMsg(pageObj), 3000);
-    },
-    closeErrMsg: function closeErrMsg(pageObj) {
-      pageObj.setData({
-        tips: {
-          hiddenErrmsg: true,
-          errmsg: ''
+        var length_pad = length - str.length
+        switch (pad_type) {
+            case 'left':
+                for (var index = 0; index < length_pad; index++) {
+                    str = pad_str + str
+                }
+                break;
+
+            case 'right':
+                for (var index = 0; index < length_pad; index++) {
+                    str = str + pad_str
+                }
+                break;
         }
-      });
+        return str
     },
-    returnCloseErrMsg: function returnCloseErrMsg(pageObj) {
-      var self = this;
-      return function () {
-        self.closeErrMsg(pageObj);
-      };
+    // 提示工具
+    TIP: {
+        showErrMsg: function(pageObj, errmsg) {
+            pageObj.setData({
+                    tips: {
+                        hiddenErrmsg: false,
+                        errmsg: errmsg
+                    }
+
+                })
+                //3秒后关闭
+            setTimeout(this.returnCloseErrMsg(pageObj), 3000)
+        },
+        closeErrMsg: function(pageObj) {
+            pageObj.setData({
+                tips: {
+                    hiddenErrmsg: true,
+                    errmsg: ''
+                }
+            })
+        },
+        returnCloseErrMsg: function(pageObj) {
+            var self = this
+            return function() {
+                self.closeErrMsg(pageObj)
+            }
+        }
+    },
+    // 验证手机号
+    verifyMobile: function(pageObj) {
+        if (pageObj.data.mobile == '') {
+            this.TIP.showErrMsg(pageObj, '请填写手机号码')
+            return false
+        }
+        var re = /^1\d{10}/g
+        if (!re.test(pageObj.data.mobile)) {
+            this.TIP.showErrMsg(pageObj, '手机号码格式不正确')
+            return false
+        }
+        return true
+    },
+    // 保存图片到本地相册
+    savePhoto: function(canvasId, pageObj) {
+        const wxCanvasToTempFilePath = app.wxPromisify(wx.canvasToTempFilePath)
+        const wxSaveImageToPhotosAlbum = app.wxPromisify(wx.saveImageToPhotosAlbum)
+        wxCanvasToTempFilePath({
+            canvasId: canvasId
+        }, this).then(res => {
+            return wxSaveImageToPhotosAlbum({
+                filePath: res.tempFilePath
+            })
+        }, err => {
+            pageObj.setData({
+                saveStatus: true
+            })
+            wx.getSetting({
+                success(res) {
+                    if (!res.authSetting['scope.writePhotosAlbum']) {
+                        wx.openSetting({
+                            success: function(res) {
+                                wx.showModal({
+                                    title: app.globalData.projectName,
+                                    content: '如未提示保存成功，请重新点击保存',
+                                    showCancel: false,
+                                    confirmText: '知道了'
+
+                                })
+                            },
+                            fail: function() {
+                                wx.showModal({
+                                    title: app.globalData.projectName,
+                                    content: '海报保存失败，请重新尝试',
+                                    showCancel: false,
+                                    confirmText: '知道了'
+                                })
+                            }
+                        })
+                    }
+                }
+            })
+
+        }).then(res => {
+            pageObj.setData({
+                saveStatus: true
+            })
+            wx.hideLoading()
+            wx.showModal({
+                title: app.globalData.projectName,
+                content: '图片已保存至系统相册了',
+                showCancel: false,
+                confirmText: '知道了'
+
+            })
+        }, err => {
+            pageObj.setData({
+                saveStatus: true
+            })
+            wx.showModal({
+                title: app.globalData.projectName,
+                content: '图片保存失败',
+                showCancel: false,
+                confirmText: '知道了'
+            })
+        })
+    },
+    // 隐藏
+    setHidden: function(pageObj, timer) {
+        setTimeout(function() {
+            pageObj.setData({
+                booking_time_hidden: true
+            })
+        }, timer)
     }
-  },
-  // 验证手机号
-  verifyMobile: function verifyMobile(pageObj) {
-    if (pageObj.data.mobile == '') {
-      this.TIP.showErrMsg(pageObj, '请填写手机号码');
-      return false;
-    }
-    var re = /^1\d{10}/g;
-    if (!re.test(pageObj.data.mobile)) {
-      this.TIP.showErrMsg(pageObj, '手机号码格式不正确');
-      return false;
-    }
-    return true;
-  }
-};
-module.exports = common;
-//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInV0aWxzL3V0aWwuanMiXSwibmFtZXMiOlsiY29tbW9uIiwiVElQIiwic2hvd0Vyck1zZyIsInBhZ2VPYmoiLCJlcnJtc2ciLCJzZXREYXRhIiwidGlwcyIsImhpZGRlbkVycm1zZyIsInNldFRpbWVvdXQiLCJyZXR1cm5DbG9zZUVyck1zZyIsImNsb3NlRXJyTXNnIiwic2VsZiIsInZlcmlmeU1vYmlsZSIsImRhdGEiLCJtb2JpbGUiLCJyZSIsInRlc3QiLCJtb2R1bGUiLCJleHBvcnRzIl0sIm1hcHBpbmdzIjoiOztBQUFBLElBQUlBLFNBQVM7QUFDWDtBQUNBQyxPQUFLO0FBQ0hDLGdCQUFZLG9CQUFVQyxPQUFWLEVBQW1CQyxNQUFuQixFQUEyQjtBQUNyQ0QsY0FBUUUsT0FBUixDQUFnQjtBQUNkQyxjQUFLO0FBQ0hDLHdCQUFjLEtBRFg7QUFFSEgsa0JBQVFBO0FBRkw7O0FBRFMsT0FBaEI7QUFPQTtBQUNBSSxpQkFBVyxLQUFLQyxpQkFBTCxDQUF1Qk4sT0FBdkIsQ0FBWCxFQUE0QyxJQUE1QztBQUNELEtBWEU7QUFZSE8saUJBQWEscUJBQVVQLE9BQVYsRUFBbUI7QUFDOUJBLGNBQVFFLE9BQVIsQ0FBZ0I7QUFDZEMsY0FBSztBQUNIQyx3QkFBYyxJQURYO0FBRUhILGtCQUFRO0FBRkw7QUFEUyxPQUFoQjtBQU1ELEtBbkJFO0FBb0JISyx1QkFBbUIsMkJBQVVOLE9BQVYsRUFBbUI7QUFDcEMsVUFBSVEsT0FBTyxJQUFYO0FBQ0EsYUFBTyxZQUFZO0FBQ2pCQSxhQUFLRCxXQUFMLENBQWlCUCxPQUFqQjtBQUNELE9BRkQ7QUFHRDtBQXpCRSxHQUZNO0FBNkJYO0FBQ0FTLGdCQUFjLHNCQUFVVCxPQUFWLEVBQW1CO0FBQy9CLFFBQUlBLFFBQVFVLElBQVIsQ0FBYUMsTUFBYixJQUF1QixFQUEzQixFQUErQjtBQUM3QixXQUFLYixHQUFMLENBQVNDLFVBQVQsQ0FBb0JDLE9BQXBCLEVBQTZCLFNBQTdCO0FBQ0EsYUFBTyxLQUFQO0FBQ0Q7QUFDRCxRQUFJWSxLQUFLLFdBQVQ7QUFDQSxRQUFJLENBQUNBLEdBQUdDLElBQUgsQ0FBUWIsUUFBUVUsSUFBUixDQUFhQyxNQUFyQixDQUFMLEVBQW1DO0FBQ2pDLFdBQUtiLEdBQUwsQ0FBU0MsVUFBVCxDQUFvQkMsT0FBcEIsRUFBNkIsV0FBN0I7QUFDQSxhQUFPLEtBQVA7QUFDRDtBQUNELFdBQU8sSUFBUDtBQUNEO0FBekNVLENBQWI7QUEyQ0FjLE9BQU9DLE9BQVAsR0FBaUJsQixNQUFqQiIsImZpbGUiOiJ1dGlscy91dGlsLmpzIiwic291cmNlc0NvbnRlbnQiOlsidmFyIGNvbW1vbiA9IHtcbiAgLy8g5o+Q56S65bel5YW3XG4gIFRJUDoge1xuICAgIHNob3dFcnJNc2c6IGZ1bmN0aW9uIChwYWdlT2JqLCBlcnJtc2cpIHtcbiAgICAgIHBhZ2VPYmouc2V0RGF0YSh7XG4gICAgICAgIHRpcHM6e1xuICAgICAgICAgIGhpZGRlbkVycm1zZzogZmFsc2UsXG4gICAgICAgICAgZXJybXNnOiBlcnJtc2dcbiAgICAgICAgfVxuICAgICAgICBcbiAgICAgIH0pXG4gICAgICAvLzPnp5LlkI7lhbPpl61cbiAgICAgIHNldFRpbWVvdXQodGhpcy5yZXR1cm5DbG9zZUVyck1zZyhwYWdlT2JqKSwgMzAwMClcbiAgICB9LFxuICAgIGNsb3NlRXJyTXNnOiBmdW5jdGlvbiAocGFnZU9iaikge1xuICAgICAgcGFnZU9iai5zZXREYXRhKHtcbiAgICAgICAgdGlwczp7XG4gICAgICAgICAgaGlkZGVuRXJybXNnOiB0cnVlLFxuICAgICAgICAgIGVycm1zZzogJydcbiAgICAgICAgfVxuICAgICAgfSlcbiAgICB9LFxuICAgIHJldHVybkNsb3NlRXJyTXNnOiBmdW5jdGlvbiAocGFnZU9iaikge1xuICAgICAgdmFyIHNlbGYgPSB0aGlzXG4gICAgICByZXR1cm4gZnVuY3Rpb24gKCkge1xuICAgICAgICBzZWxmLmNsb3NlRXJyTXNnKHBhZ2VPYmopXG4gICAgICB9XG4gICAgfVxuICB9LFxuICAvLyDpqozor4HmiYvmnLrlj7dcbiAgdmVyaWZ5TW9iaWxlOiBmdW5jdGlvbiAocGFnZU9iaikge1xuICAgIGlmIChwYWdlT2JqLmRhdGEubW9iaWxlID09ICcnKSB7XG4gICAgICB0aGlzLlRJUC5zaG93RXJyTXNnKHBhZ2VPYmosICfor7floavlhpnmiYvmnLrlj7fnoIEnKVxuICAgICAgcmV0dXJuIGZhbHNlXG4gICAgfVxuICAgIHZhciByZSA9IC9eMVxcZHsxMH0vZ1xuICAgIGlmICghcmUudGVzdChwYWdlT2JqLmRhdGEubW9iaWxlKSkge1xuICAgICAgdGhpcy5USVAuc2hvd0Vyck1zZyhwYWdlT2JqLCAn5omL5py65Y+356CB5qC85byP5LiN5q2j56GuJylcbiAgICAgIHJldHVybiBmYWxzZVxuICAgIH1cbiAgICByZXR1cm4gdHJ1ZVxuICB9XG59XG5tb2R1bGUuZXhwb3J0cyA9IGNvbW1vbiJdfQ==
+}
+module.exports = common

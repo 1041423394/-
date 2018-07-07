@@ -1,0 +1,23 @@
+<image src="../../images/cb.png" class="music-img {{playMusic?'roateMusic':''}}"/>
+<view class="music-dot"></view>
+<view class="fml-flex-cloumn">
+    <view class="person-box {{playMusic?'roateRound':''}}">
+        <image src="{{userInfo.avatarUrl}}" class="logo-img animated zoomIn"/>
+    </view>
+    <progress percent="{{progress}}" active active-mode="forwards"  activeColor="#f4b1c6" style="width:90%;margin-top:150rpx;"/>
+</view>
+<audio  class="fml-audio"
+    src="https://wechat.fmlcoder.com/music/suiyueshentou.mp3" 
+    controls 
+    id="myAudio1"
+    loop
+    poster="../../images/indexShare.png"
+    name="岁月神偷"
+    author="金岐文"
+    bindplay="playMusic"
+    bindpause="pauseMusic"
+    bindended="endMusic"
+    binderror="errMusic">
+</audio>
+<import src="../template/template.wxml" />
+<template is="tips" data="{{tips}}"></template>

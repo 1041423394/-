@@ -1,0 +1,70 @@
+page {
+    background: -webkit-linear-gradient(top, #f4b1c6, #79d2d6, #fff);
+    position: relative;
+    display: flex;
+    flex-direction: cloumn;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #fff;
+}
+
+.person-box {
+    margin-top: 200rpx;
+    width: 300rpx;
+    height: 300rpx;
+    border: 80rpx solid #333;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: -1px -1px 5px 10px rgba(255, 255, 255, 0.5);
+}
+
+.logo-img {
+    width: 300rpx;
+    height: 300rpx;
+    border-radius: 50%;
+}
+
+.fml-audio {
+    position: fixed;
+    bottom: 10rpx;
+    width: 100%;
+    background: #fff;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20rpx;
+}
+
+.music-img {
+    position: fixed;
+    width: 320rpx;
+    height: 240rpx;
+    top: -70rpx;
+    left: 50%;
+    transform: rotate(-15deg);
+    margin-left: -70rpx;
+    z-index: 2;
+    transition: all 1s
+}
+
+.music-img.roateMusic {
+    transform: rotate(25deg);
+    top: 0;
+    margin-left: -140rpx;
+}
+
+.music-dot {
+    width: 10rpx;
+    height: 10rpx;
+    background: #eee;
+    border: 20rpx solid #fff;
+    position: fixed;
+    z-index: 3;
+    left: 50%;
+    margin-left: -80rpx;
+    top: -16rpx;
+    border-radius: 50%;
+}

@@ -1,0 +1,28 @@
+ <view class="fml-flex">
+     <view class="fml-flex fml-time" bindtap='openBookingTime'>
+         <view class='fml-placeHolder fml-padding'>预约时间</view>
+         <input type="text"  value="{{booking_time_value}}" class="text-right" disabled style="margin-right:50rpx;" />
+     </view>
+ </view>
+   <!--预约时间-->
+  <view class="layer" wx:if="{{!booking_time_hidden}}">
+    <view class="fml-modal animated  {{animatedClass}}" bindtap="canclelBookingTime"></view>
+    <view class="layer-wrap animated {{animatedClass}}">
+      <view class="msg-head fml-flex fml-sh-common">
+        <view class="text-center" bindtap="canclelBookingTime">取消</view>
+        <view class="text-center " >预约时间</view>
+        <view class="common-color text-center" bindtap="submitBookingTime">确定</view>
+      </view>
+      <picker-view class="picker-time" indicator-style="height: 50px;" style="width: 100%; height: 500rpx;" value="{{value}}" bindchange="bindBookingTimeChange">
+        <picker-view-column>
+          <view wx:for="{{booking_time_days}}" wx:key="item" style="line-height: 50px">{{item.name}}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view wx:for="{{booking_time_hours}}" wx:key="item" style="line-height: 50px">{{item}}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view wx:for="{{booking_time_minus}}" wx:key="item" style="line-height: 50px">{{item}}</view>
+        </picker-view-column>
+      </picker-view>
+    </view>
+  </view>

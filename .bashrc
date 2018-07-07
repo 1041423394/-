@@ -1,1 +1,1 @@
-alias nvm='node /Volumes/DATA/wechat-frame/node.js'
+alias nvm='node /Volumes/usr/wechat-frame/node.js'

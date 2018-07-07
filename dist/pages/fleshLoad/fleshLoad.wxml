@@ -1,0 +1,44 @@
+<!--pages/fml/starStore/starStore.wxml-->
+<view class="fml-loading" wx:if="{{loading==0}}">
+  <view class="jd-loading"></view>
+  <view class="jd-loading jd-loading2"></view>
+  <view class="jd-loading"></view>
+</view>
+<view class="fml-starStore padTabbar" wx:else>
+ 
+  <view class="starStore-list fml-flex" style="justify-content:flex-start">
+    <view class="starStore-listItem" wx:for="{{dataList}}" wx:key="item" bindtap='listClick' data-id="{{item.id}}" data-shopid="{{item.shop_id}}">
+      <view class="starStore-product">
+        <view class="starStore-img">
+          <image src='{{item.img?item.img:defaultImg}}'></image>
+        </view>
+        <view class='starStore-proInfo'>
+        <view class="fml-price">￥{{item.price}}
+            <text class="fml-del-price" wx:if="{{item.purchase_price!='0.00'}}">￥{{item.purchase_price}}</text>
+        </view>
+          <view class="listItem-proName ellipsis">{{item.goods_name}}</view>
+          <view>
+            <view class="listItem-proInfo">
+              <view class="hidden proInfo-item">{{item.describe?item.describe:'商家太忙，未留描述'}}</view>
+            </view>
+          </view>
+        </view>
+
+      </view>
+    </view>
+  </view>
+
+
+  <view class="refresh-load" wx:if="{{downUp==1}}">
+    <view class="jd-loading"></view>
+    <view class="jd-loading jd-loading2"></view>
+    <view class="jd-loading jd-loading3"></view>
+  </view>
+  <view class="refresh-load" wx:if="{{downUp==2}}">
+    ------------某有咯-----------
+  </view>
+  <view class="fml-nullContent" wx:if="{{nullContent==0}}">
+      <image src="../../images/indexShare.png" />
+    <view>精选商品正在上架途中，敬请期待</view>
+  </view>
+</view>

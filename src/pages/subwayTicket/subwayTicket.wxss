@@ -1,0 +1,111 @@
+/* pages/selectAdress/selectAdress.wxss */
+
+page {
+    padding: 30rpx;
+    box-sizing: border-box;
+    background: #79d2d6;
+    border-top: 1px solid #fff;
+    font-size: 36rpx;
+}
+
+view {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.fml-select {
+    background: #fff;
+    border-radius: 6px 6px 10px 10px;
+    padding: 25rpx;
+}
+
+.fml-address:first-child {
+    margin-bottom: 35rpx;
+}
+
+.address-info,
+.fml-num,
+.num-box {
+    display: flex;
+    align-items: center;
+}
+
+.fml-info {
+    border-top: 1px dashed #eef1f9;
+    border-radius: 10px 10px 6px 6px;
+    padding: 30rpx 25rpx;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.fml-circle {
+    width: 20rpx;
+    height: 20rpx;
+    border-radius: 50%;
+    border: 2px solid mediumspringgreen;
+    margin-right: 10rpx;
+}
+
+.circle-red {
+    border-color: orangered;
+}
+
+.fml-adress {
+    font-size: 45rpx;
+    padding: 30rpx 0;
+    color: #666;
+}
+
+.fml-num:first-child {
+    margin-bottom: 40rpx;
+}
+
+.num {
+    display: inline;
+    text-align: center;
+    padding: 15rpx 10rpx;
+    font-size: 50rpx;
+    color: #ccc;
+    line-height: 1
+}
+
+.money {
+    text-align: right;
+    color: red;
+}
+
+.fml-btn {
+    margin-top: 80rpx;
+    text-align: center;
+    padding: 30rpx 0;
+    background: #ccc;
+    color: white;
+    border-radius: 4px;
+}
+
+.fml-btn-info {
+    background: rgb(16, 142, 233);
+}
+
+.color-show .num {
+    border: 1px solid #333;
+    color: #333;
+}
+
+.color-gray .num {
+    border: 1px solid #ccc;
+    color: #ccc;
+}
+
+.color-show .num:first-child,
+.color-gray .num:first-child {
+    border-right: none;
+}
+
+.color-show .num:last-child,
+.color-gray .num:last-child {
+    border-left: none;
+}
+
+.color-gray {
+    color: #ccc
+}

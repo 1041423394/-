@@ -1,37 +1,130 @@
-var regeneratorRuntime = require("../../lib/runtime.js");"use strict";
+var regeneratorRuntime = require("../../lib/runtime.js");'use strict';
 
+var uploadOss = require('../../lib/uploadAliyun.js');
+var common = require('../../utils/util.js');
+var app = getApp();
 Page({
-  /**
-   * 页面的初始数据
-   */
-  data: {},
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function onLoad(options) {},
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function onReady() {},
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function onHide() {},
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function onUnload() {},
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function onPullDownRefresh() {},
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function onReachBottom() {},
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function onShareAppMessage() {}
+    /**
+     * 页面的初始数据
+     */
+    data: {
+        imageArray: [],
+        tips: {
+            hiddenErrmsg: true,
+            errmsg: ''
+        }
+    },
+    // 添加图片
+    chooseImage: function chooseImage() {
+        var _this = this;
+        var wxChooseImage = app.wxPromisify(wx.chooseImage);
+        wxChooseImage({ count: 6 }).then(function (res) {
+            var tempFilePath = res.tempFilePaths;
+            _this.setData({
+                imageArray: tempFilePath
+            });
+        });
+    },
+
+    // 预览图片
+    previewImage: function previewImage(e) {
+        var _this = this;
+        var src = e.currentTarget.dataset.src;
+        wx.previewImage({
+            urls: _this.data.imageArray,
+            current: src
+        });
+    },
+
+    // 删除图片
+    delImage: function delImage(e) {
+        var index = e.currentTarget.dataset.index;
+        this.data.imageArray.splice(index, 1);
+        this.setData({
+            imageArray: this.data.imageArray
+        });
+    },
+
+    // 上传
+    uploadHandle: function uploadHandle() {
+        var _this2 = this;
+
+        console.log(this.data.imageArray.length);
+        if (this.data.imageArray.length <= 0) {
+            common.TIP.showErrMsg(this, '请先选择上传的图片');
+            return;
+        }
+        var imageArray = this.data.imageArray;
+        imageArray.forEach(function (temp, index) {
+            _this2.uploadFile(temp, index);
+        });
+    },
+
+
+    //上传阿里云
+    uploadFile: function uploadFile(data, length) {
+        wx.showLoading({
+            title: '数据传送中...',
+            mask: true
+        });
+        var _this = this;
+        var wxRequest = app.wxPromisify(wx.request);
+        wxRequest({
+            data: {
+                'dir': 'voice/' //上传的文件路径
+            },
+            method: 'POST',
+            url: '' //后台换取阿里oss 凭证接口
+        }).then(function (res) {
+            uploadOss({
+                filePath: data,
+                dir: 'voice/', //上传的文件路径
+                accessid: res.data.accessid,
+                signature: res.data.signature,
+                policy: res.data.policy,
+                success: function success(res) {
+                    // 如果多个文件同时操作，等所有图片上传完毕的操作下方的
+                    if (that.data.imageArray.length - 1 == length) {
+                        wx.hideLoading();
+                        console.log(res); //上传成功返回的oss返回的值，作为传给自己服务器的参数值
+                    }
+                },
+                fail: function fail(err) {
+                    common.TIP.showErrMsg(_this, '上传阿里oss失败');
+                }
+            });
+        }, function (err) {
+            common.TIP.showErrMsg(_this, '获取凭证失败');
+        });
+    },
+
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function onLoad(options) {},
+
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     */
+    onReady: function onReady() {},
+    /**
+     * 生命周期函数--监听页面隐藏
+     */
+    onHide: function onHide() {},
+    /**
+     * 生命周期函数--监听页面卸载
+     */
+    onUnload: function onUnload() {},
+    /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    onPullDownRefresh: function onPullDownRefresh() {},
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function onReachBottom() {},
+    /**
+     * 用户点击右上角分享
+     */
+    onShareAppMessage: function onShareAppMessage() {}
 });
-//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBhZ2VzL3VwbG9hZE9zcy91cGxvYWRPc3MuanMiXSwibmFtZXMiOlsiUGFnZSIsImRhdGEiLCJvbkxvYWQiLCJvcHRpb25zIiwib25SZWFkeSIsIm9uSGlkZSIsIm9uVW5sb2FkIiwib25QdWxsRG93blJlZnJlc2giLCJvblJlYWNoQm90dG9tIiwib25TaGFyZUFwcE1lc3NhZ2UiXSwibWFwcGluZ3MiOiI7O0FBQUFBLEtBQUs7QUFDRDs7O0FBR0FDLFFBQU0sRUFKTDtBQU1EOzs7QUFHQUMsVUFBUSxnQkFBVUMsT0FBVixFQUFtQixDQUMxQixDQVZBO0FBV0Q7OztBQUdBQyxXQUFTLG1CQUFZLENBRXBCLENBaEJBO0FBaUJEOzs7QUFHQUMsVUFBUSxrQkFBWSxDQUVuQixDQXRCQTtBQXVCRDs7O0FBR0FDLFlBQVUsb0JBQVksQ0FFckIsQ0E1QkE7QUE2QkQ7OztBQUdBQyxxQkFBbUIsNkJBQVksQ0FFOUIsQ0FsQ0E7QUFtQ0Q7OztBQUdBQyxpQkFBZSx5QkFBWSxDQUUxQixDQXhDQTtBQXlDRDs7O0FBR0FDLHFCQUFtQiw2QkFBWSxDQUU5QjtBQTlDQSxDQUFMIiwiZmlsZSI6InBhZ2VzL3VwbG9hZE9zcy91cGxvYWRPc3MuanMiLCJzb3VyY2VzQ29udGVudCI6WyJQYWdlKHtcbiAgICAvKipcbiAgICAgKiDpobXpnaLnmoTliJ3lp4vmlbDmja5cbiAgICAgKi9cbiAgICBkYXRhOiB7XG4gICAgfSxcbiAgICAvKipcbiAgICAgKiDnlJ/lkb3lkajmnJ/lh73mlbAtLeebkeWQrOmhtemdouWKoOi9vVxuICAgICAqL1xuICAgIG9uTG9hZDogZnVuY3Rpb24gKG9wdGlvbnMpIHtcbiAgICB9LFxuICAgIC8qKlxuICAgICAqIOeUn+WRveWRqOacn+WHveaVsC0t55uR5ZCs6aG16Z2i5Yid5qyh5riy5p+T5a6M5oiQXG4gICAgICovXG4gICAgb25SZWFkeTogZnVuY3Rpb24gKCkge1xuICBcbiAgICB9LFxuICAgIC8qKlxuICAgICAqIOeUn+WRveWRqOacn+WHveaVsC0t55uR5ZCs6aG16Z2i6ZqQ6JePXG4gICAgICovXG4gICAgb25IaWRlOiBmdW5jdGlvbiAoKSB7XG4gIFxuICAgIH0sXG4gICAgLyoqXG4gICAgICog55Sf5ZG95ZGo5pyf5Ye95pWwLS3nm5HlkKzpobXpnaLljbjovb1cbiAgICAgKi9cbiAgICBvblVubG9hZDogZnVuY3Rpb24gKCkge1xuICBcbiAgICB9LFxuICAgIC8qKlxuICAgICAqIOmhtemdouebuOWFs+S6i+S7tuWkhOeQhuWHveaVsC0t55uR5ZCs55So5oi35LiL5ouJ5Yqo5L2cXG4gICAgICovXG4gICAgb25QdWxsRG93blJlZnJlc2g6IGZ1bmN0aW9uICgpIHtcbiAgXG4gICAgfSxcbiAgICAvKipcbiAgICAgKiDpobXpnaLkuIrmi4nop6blupXkuovku7bnmoTlpITnkIblh73mlbBcbiAgICAgKi9cbiAgICBvblJlYWNoQm90dG9tOiBmdW5jdGlvbiAoKSB7XG4gIFxuICAgIH0sXG4gICAgLyoqXG4gICAgICog55So5oi354K55Ye75Y+z5LiK6KeS5YiG5LqrXG4gICAgICovXG4gICAgb25TaGFyZUFwcE1lc3NhZ2U6IGZ1bmN0aW9uICgpIHtcbiAgXG4gICAgfVxuICB9KSJdfQ==

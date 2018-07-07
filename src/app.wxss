@@ -1,1 +1,270 @@
-@import 'css/animate.wxss';@import 'css/template.wxss';page{font-family:-apple-system-font,Helvetica Neue,Helvetica,sans-serif;font-size:28rpx}canvas,form,image,input,scroll-view,swiper,textarea,view{width:100%;display:block;-webkit-user-select:none}button{border:none;background:#e8633c;font-size:60rpx;color:#fff}button::after{border:none;background:#fff;width:auto;height:auto;font-size:60rpx;color:#e8633c}.border-b{border-bottom:1px solid #e0e1e1}.border-t{border-top:1px solid #e0e1e1}.text-center{text-align:center}.text-left{text-align:left}.text-right{text-align:right}.text-strong{font-weight:700}.ellipsis{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.ellipsis2,.ellipsis3{overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.ellipsis3{-webkit-line-clamp:3}.hidden{overflow:hidden}.hidden-x{overflow-x:hidden}.nowrap{white-space:nowrap}.fml-flex{display:flex;align-items:center;justify-content:center}.fml-flex-1{flex:1}.fml-flex-cloumn{display:flex;flex-direction:column;align-items:center;justify-content:center}.flex-wrap{flex-wrap:wrap}.fml-modal{position:fixed;width:100%;right:0;bottom:0;height:100%;background:rgba(0,0,0,.4);z-index:1}
+@import 'css/animate.wxss';
+@import 'css/template.wxss';
+@import 'components/fml.wxss';
+
+/* @import 'components/fml.wxss'; */
+
+page {
+    font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 28rpx;
+    color: #333;
+    transition: all 0.2s ease-in;
+}
+
+canvas,
+form,
+image,
+input,
+scroll-view,
+swiper,
+textarea,
+view {
+    width: 100%;
+    display: block;
+    -webkit-user-select: none
+}
+
+button {
+    border: none;
+    background: #e8633c;
+    font-size: 60rpx;
+    color: #fff
+}
+
+button::after {
+    border: none;
+    background: #fff;
+    width: auto;
+    height: auto;
+    font-size: 60rpx;
+    color: #e8633c
+}
+
+.border-b {
+    border-bottom: 1px solid #e0e1e1
+}
+
+.border-t {
+    border-top: 1px solid #e0e1e1
+}
+
+.text-center {
+    text-align: center
+}
+
+.text-left {
+    text-align: left
+}
+
+.text-right {
+    text-align: right
+}
+
+.text-strong {
+    font-weight: 700
+}
+
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+
+.ellipsis2,
+.ellipsis3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical
+}
+
+.ellipsis3 {
+    -webkit-line-clamp: 3
+}
+
+.hidden {
+    overflow: hidden
+}
+
+.hidden-x {
+    overflow-x: hidden
+}
+
+.nowrap {
+    white-space: nowrap
+}
+
+.fml-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.fml-flex-1 {
+    flex: 1
+}
+
+.fml-flex-cloumn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center
+}
+
+.flex-wrap {
+    flex-wrap: wrap
+}
+
+.fml-modal {
+    position: fixed;
+    width: 100%;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    background: rgba(0, 0, 0, .4);
+    z-index: 2
+}
+
+image {
+    max-width: 100%;
+    height: 100%
+}
+
+.commit-btn {
+    height: 80rpx;
+    width: 600rpx;
+    margin: 80rpx auto;
+    background: #f4b1c6;
+    color: #fff;
+    box-shadow: -2px -2px 5px 10px rgab(0, 0, 0, .8);
+    border-radius: 10px;
+    line-height: 80rpx;
+}
+
+.borderB {
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.borderDB {
+    border-bottom: 20rpx solid #e8e8e8;
+}
+
+
+/*loading  */
+
+.fml-loading {
+    width: 120px;
+    height: 120px;
+    font-weight: 600;
+    font-size: 42rpx;
+    color: #4875e0;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -60px;
+    margin-left: -60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.jd-loading {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #40bb9c;
+    margin-left: 5px;
+    animation: loading 1s 0.1s infinite;
+}
+
+.jd-loading2 {
+    background: #fe9c35;
+    animation: loading 1s 0.25s infinite;
+}
+
+.jd-loading:last-child {
+    background: #fb6267;
+    animation: loading 1s 0.35s infinite;
+}
+
+
+/* 价格 */
+
+.fml-del-price {
+    font-size: 26rpx;
+    color: #9b9b9f;
+    position: relative;
+    margin-left: 10rpx;
+}
+
+.fml-del-price::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    width: 100%;
+    border-top: 1px solid #8c8c8c;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    top: auto;
+    bottom: 50%;
+}
+
+
+/* 加载 */
+
+.refresh-load {
+    height: 30px;
+    font-size: 25rpx;
+    color: #ccc;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* 请求数据为空 */
+
+.fml-nullContent {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300rpx;
+    position: fixed;
+    top: 50%;
+    margin-top: -150rpx;
+}
+
+.fml-nullContent image {
+    width: 228rpx;
+    height: 189rpx;
+}
+
+.fml-nullContent view {
+    margin-top: 20rpx;
+    font-size: 30rpx;
+    text-align: center;
+}
+
+
+/*  */
+
+.fml-padding {
+    padding: 0 32rpx;
+    box-sizing: border-box;
+}
+
+.fml-placeHolder {
+    color: #7a7a7a;
+}
+
+.common-color {
+    color: #fb6267
+}

@@ -1,0 +1,73 @@
+/* pages/myAddress/myAddress.wxss */
+
+page {
+    position: relative;
+}
+
+.fml-myAddress {
+    font-size: 28rpx;
+    overflow: hidden;
+    position: relative;
+}
+
+.list-left {
+    width: 110rpx;
+    margin-right: 38rpx;
+    text-align: center;
+}
+
+.list-name,
+.list-mobile {
+    color: #404040;
+    padding-bottom: 8rpx;
+}
+
+.list-default {
+    width: 72rpx;
+    height: 32rpx;
+    text-align: center;
+    line-height: 32rpx;
+    border: 1px solid #FE9C35;
+    border-radius: 2px;
+    font-size: 22rpx;
+    color: #FE9C35;
+}
+
+.list-address {
+    color: #898989;
+    font-size: 24rpx;
+}
+
+.list-right {
+    margin-right: 74rpx;
+}
+
+.list-edit-icon {
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.fml-shopCart-del {
+    width: 120rpx;
+    line-height: 150rpx;
+    text-align: center;
+    background: #e64340;
+    font-size: 24rpx;
+    color: #fff;
+    margin-right: -120rpx;
+}
+
+.address-btn {
+    padding: 0;
+    position: fixed;
+    bottom: 0;
+    height: 96rpx;
+    background: #fff;
+    border-top: 1px solid #eee;
+    z-index: 10;
+    line-height: 96rpx;
+}
+
+.balance-btn {
+    color: #F4A44D;
+}

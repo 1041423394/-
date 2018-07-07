@@ -1,0 +1,48 @@
+page {
+    background: -webkit-linear-gradient(top, #f4b1c6, #79d2d6);
+    border-top: 1px solid #fff;
+}
+
+.fml-choosePre {
+    display: flex;
+    flex-direction: row;
+    font-size: 32rpx;
+    padding: 0 24rpx;
+    align-items: center;
+    justify-content: flex-start;
+    height: auto;
+    flex-wrap: wrap;
+}
+
+.choosePre-delImage {
+    position: absolute;
+    right: 10rpx;
+    top: 10rpx;
+}
+
+.choosePre-imgAdd {
+    width: 200rpx;
+    height: 200rpx;
+    border: 1px solid #cfe8ff;
+    background: #f8fcff;
+    color: #67b5ff;
+    margin-top: 30rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 100rpx;
+}
+
+.choosePre-imageList {
+    width: 200rpx;
+    height: 200rpx;
+    margin-right: 39rpx;
+    border: 1px solid #cfe8ff;
+    margin-top: 30rpx;
+    position: relative;
+}
+
+.choosePre-image {
+    width: 200rpx;
+    height: 200rpx;
+}

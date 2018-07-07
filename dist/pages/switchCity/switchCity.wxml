@@ -1,0 +1,45 @@
+<view class="fml-switchCity">
+
+  <view class="fml-selectInput borderDB">
+    <input type="text" placeholder="输入城市" class="fml-searchInput" bindinput='searchInput' />
+    <icon type="search" size="15" color="#9b9d9f" class="fml-iconSearch" />
+  </view>
+  <block wx:if="{{!keyup}}">
+    <view class="fml-currentCity borderB">
+      <text class='fml-padCommon'>当前：{{currentCity}}</text>
+    </view>
+
+    <view class="fml-RecentCity" wx:if="{{historyCity.length>0}}">
+      <view class="fml-bgGray fml-padCommon">最近访问</view>
+      <view class="fml-fixedCity ">
+        <text class='fixedCity-list' wx:for='{{historyCity}}' wx:key="item" data-id="{{item.region_id}}" bindtap='historyClick' data-item="{{item.name}}">{{item.name}}</text>
+      </view>
+    </view>
+  </block>
+
+
+  <view class="fml-RecentCity">
+    <view wx:if="{{keyup}}">
+      <view class="fml-cityList">
+        <view wx:for="{{searchResult}}" wx:key="item" class='cityList-item borderB' data-pid="{{item.region_id}}" data-index="{{index}}"
+          bindtap='selectClick'>{{item.name}}</view>
+      </view>
+    </view>
+    <block wx:else>
+      <view wx:for="{{keys}}" wx:key="item">
+        <view class="fml-bgGray">{{item}}</view>
+        <view class="fml-cityList" wx:for="{{initCityList}}" wx:for-item="item2" wx:if="{{item==item2.key}}" wx:key="">
+          <view class='cityList-item' data-id="{{item2.id}}" wx:for="{{item2.cols}}" wx:for-item="item3" wx:key="" data-pid="{{item3.region_id}}"
+            data-index="{{index}}" bindtap='selectClick'>{{item3.name}}</view>
+        </view>
+      </view>
+
+    </block>
+
+
+
+
+  </view>
+
+
+</view>

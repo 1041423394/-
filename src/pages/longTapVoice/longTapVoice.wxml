@@ -1,0 +1,33 @@
+<view class="fml-voice">
+    <view class="voice-person">
+        <view class="person-box {{voiceStart?'roateRound':''}}">
+           <image src="{{userInfo.avatarUrl}}" class="logo-img animated zoomIn"/>
+        </view>
+        <view class="voice-dot"></view>
+        <view class="voice-time text-right">{{recordTime}}``</view>
+    </view>
+    <progress percent="{{progress}}" active active-mode="forwards"  activeColor="#fbdb4c" />
+    <view class="voice-handle fml-flex">
+        <view class="voice-play text-right" bindtap="delVoice"><icon type="cancel" size="30" color="{{recordTime>0 || playVoice?'#79d2d6':'#d9dada'}}"/></view>
+        <view class="voice-record text-center">
+            <span class="iconfont icon-record {{voiceStart?'bgSelected':''}}" wx:if="{{!readyVoice}}"
+                catchtouchstart="recordVoice"
+                catchtouchend="endVoice"
+                catchtouchcancel="endVoice"
+                catchtouchmove="moveFinger"
+            ></span>
+            <span class="iconfont icon-pause"  bindtap="stopVoice" wx:elif="{{playVoice}}"></span>
+            <span class="iconfont icon-play" bindtap="playVoice" wx:else></span>
+
+        </view>
+        <view class="voice-save" bindtap="saveVoice"><icon type="success_circle" size="30" color="{{recordTime>0 || playVoice?'#79d2d6':'#d9dada'}}"/></view>
+    </view>
+    <view class="text-center voice-introduce" style="height:30rpx">
+        <text wx:if="{{!readyVoice}}">长按录音</text>
+        <text wx:elif="{{playVoice}}">单击停止</text>
+        <text wx:else>单击播放</text>
+    </view>
+
+</view>
+<import src="../template/template.wxml" />
+<template is="tips" data="{{tips}}"></template>

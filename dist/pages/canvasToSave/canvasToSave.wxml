@@ -8,7 +8,6 @@
     <image src="{{userInfo.avatarUrl}}"></image>
   </view>
   <view class='text-center answer-nickname animated zoomIn'>{{userInfo.nickName}}</view>
-
   <view class='fml-result'>
     <view class='result-content'>
       <view class='result-title text-center'>wechat-frame</view>
@@ -21,4 +20,4 @@
   </view>
 </view>
 <!--生成图片  -->
- <canvas canvas-id="shareCanvas" hidden='{{hiddenCanvas}}' style="width:354px;height:474px;position:fixed;top:9999px"></canvas> 
+ <canvas canvas-id="shareCanvas" style="width:354px;height:474px;position:fixed;top:9999px"></canvas> 

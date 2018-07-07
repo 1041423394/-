@@ -14,15 +14,15 @@ function prefixStream(prefixText) {
 
 function gulpAddRequireRuntime() {
     // 创建一个让每个文件通过的 stream 通道
-    return through.obj(function (file, enc, cb) {
+    return through.obj(function(file, enc, cb) {
         var prefixText = ``;
         var rel = path.relative(path.dirname(file.path), path.join(file.base, 'lib/runtime.js'));
         rel = rel.replace(/\\/g, '/');
         if (rel === 'runtime.js') {
-            prefixText = new Buffer(prefixText); // 预先分配
+            prefixText = new Buffer.from(prefixText); // 预先分配
         } else {
             prefixText = `var regeneratorRuntime = require("${rel}");`;
-            prefixText = new Buffer(prefixText); // 预先分配
+            prefixText = new Buffer.from(prefixText); // 预先分配
         }
 
 
@@ -92,7 +92,10 @@ gulp.task('watch-css', () => {
     return watch('./src/**/*.wxss')
         .pipe(gulp.dest('./dist'));
 });
-
+gulp.task('watch-js', () => {
+    return watch('./src/**/*.js')
+        .pipe(gulp.dest('./dist'));
+});
 gulp.task('watch-xml', () => {
     return watch('./src/**/*.wxml')
         .pipe(gulp.dest('./dist'));
@@ -118,7 +121,7 @@ gulp.task('watch-gif', () => {
         .pipe(gulp.dest('./dist'));
 });
 
-gulp.task("clean", function () {
+gulp.task("clean", function() {
     return gulp.src('./dist')
         .pipe(clean());
 });
@@ -126,16 +129,16 @@ gulp.task("clean", function () {
 gulp.task('res', ['css', 'xml', 'json', 'jpg', 'png', 'gif']);
 
 
-gulp.task('build', ['clean'], function () {
+gulp.task('build', ['clean'], function() {
     gulp.start('scripts', 'res');
 });
 
 gulp.task('watch', [
     'watch-css',
-    'watch-css',
     'watch-xml',
     'watch-json',
     'watch-jpg',
+    'watch-js',
     'watch-png',
     'watch-gif',
     'compile',

@@ -1,0 +1,57 @@
+.voice-person {
+    background: -webkit-linear-gradient(top, #f4b1c6, #79d2d6);
+    height: 600rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.person-box {
+    width: 320rpx;
+    height: 320rpx;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px #fff;
+}
+
+.logo-img {
+    width: 260rpx;
+    height: 260rpx;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-sizing: border-box;
+}
+
+.voice-dot {
+    width: 15rpx;
+    height: 15rpx;
+    background: #fbdb4c;
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px 3px #fff;
+    position: absolute;
+    top: 180rpx;
+    right: 262rpx;
+}
+
+.voice-handle {
+    margin-top: 200rpx;
+}
+
+.voice-time {
+    position: absolute;
+    bottom: 30rpx;
+    right: 30rpx;
+    font-size: 50rpx;
+    color: #fff;
+}
+
+.voice-introduce {
+    font-size: 28rpx;
+    color: #999;
+    padding-top: 20rpx;
+}

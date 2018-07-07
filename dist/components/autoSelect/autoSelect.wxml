@@ -1,0 +1,23 @@
+<template name="autoSelect">
+  <view class="fml-modal animated {{animateCss[1] }} {{ className }}" wx:if="{{ visible }}">
+    <view class="container fml-autoSelect animated {{ animateCss[0] }}">
+      <view class="selectInput">
+        <input type="text" placeholder="搜索" class="searchInput" bindinput="{{searchInput}}" />
+        <icon type="search" size="13" color="#e5e5e5" class="iconSearch" />
+      </view>
+      <scroll-view scroll-y style="height:{{screenHeight}}px" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" class="selectList">
+        <view class="selectDetails">
+          <view wx:for="{{searchArr}}" wx:key="" wx:if="{{!keyup}}" wx:for-item="item1">
+            <view class="selectHead"> {{item1.key}}</view>
+            <view class="selectInfo" data-key="{{item1.key}}" wx:for="{{item1.cols}}" wx:for-item="item2" wx:key="" data-index="{{index}}"  data-id="{{item2.id}}" catchtap="{{selectClick}}">{{item2.display}}</view>
+          </view>
+          <view wx:for="{{searchArr}}" wx:key="item" wx:if="{{keyup}}">
+            <view class="selectInfo" data-index="{{index}}" style="border-bottom:2px solid #F6FAFE" data-index="{{index}}" catchtap="{{selectClick}}" data-id="{{item.id}}">{{item.display}}</view>
+          </view>
+
+        </view>
+      </scroll-view>
+    </view>
+    <icon type="cancel" size="30" color="white" class="iconCancel" catchtap="{{cancel}}" />
+  </view>
+</template>

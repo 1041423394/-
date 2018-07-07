@@ -1,0 +1,63 @@
+.fml-selectInput {
+    padding: 25rpx 40rpx;
+    position: relative;
+    box-sizing: border-box
+}
+
+.fml-searchInput {
+    background: white;
+    padding-left: 70rpx;
+    font-size: 24rpx;
+    border-radius: 8px;
+    height: 2rem;
+    border: 1px solid #e8e8e8;
+    overflow: hidden;
+    box-sizing: border-box
+}
+
+.fml-iconSearch {
+    position: absolute;
+    top: 50%;
+    left: 60rpx;
+    margin-top: -9px;
+}
+
+.fml-currentCity {
+    padding: 20rpx 0;
+}
+
+.fml-fixedCity {
+    margin-left: 40rpx;
+    margin-top: 30rpx;
+}
+
+.fixedCity-list {
+    padding: 10rpx 25rpx;
+    margin-right: 40rpx;
+    margin-bottom: 30rpx;
+    display: inline-block;
+    background: #f5f5f5;
+}
+
+.fml-bgGray {
+    background: #e8e8e8;
+    padding: 10rpx 40rpx;
+}
+
+.fml-cityList {
+    padding: 0;
+}
+
+.cityList-item {
+    padding: 20rpx 40rpx;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.cityList-item.borderB {
+    padding: 20rpx 40rpx;
+}
+
+.fml-padCommon {
+    padding-left: 40rpx;
+    padding-right: 40rpx;
+}

@@ -1,0 +1,41 @@
+<view class="fml-loading" wx:if="{{loading==0}}">
+    <view class="jd-loading"></view>
+    <view class="jd-loading jd-loading2"></view>
+    <view class="jd-loading"></view>
+</view>
+<view class="fml-myAddress" style="padding-bottom:150rpx" wx:if="{{nullContent!=0&&loading!=0}}">
+    <view class="myAddress-list  border-b hidden" wx:for="{{dataList}}" wx:key="item" data-index="{{index}}" data-id="{{item.id}}" bindtap='getAddress'>
+        <view class="fml-flex " bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}"  data-id="{{item.goodsId}}"  style="{{item.left}}">
+            <view class="fml-flex fml-padding">
+                <view class="list-left">
+                    <view class="list-name ellipsis">{{item.consignee}}</view>
+                    <view class="list-default" wx:if="{{item.is_default==1}}">默认</view>
+                </view>
+                <view class="list-right fml-flex-1">
+                    <view class="list-mobile">{{item.mobile}}</view>
+                    <view class='ellipsis2 list-address'>{{item.address}}</view>
+                </view>
+                <view class="list-edit-icon" catchtap='editAddress' data-index="{{index}}" data-id="{{item.id}}">
+                    <!-- <image src="../../images/icon/icon-edit.png"></image> -->
+                    <text class="iconfont icon-sorry1"></text>
+                </view>
+            </view>
+            <view class="fml-shopCart-del" data-index="{{index}}" data-addrid="{{item.id}}" catchtap='addressDelete' style='right:-132rpx'>
+                删除
+            </view>
+        </view>
+    </view>
+</view>
+<view class="address-btn">
+    <view class="balance-btn  text-center" bindtap='newAddress'>+新增地址</view>
+</view>
+<view class="refresh-load" wx:if="{{downUp==1}}">
+    <view class="refresh-loading"></view>
+    <view class="refresh-loading refresh-loading2"></view>
+    <view class="refresh-loading refresh-loading3"></view>
+</view>
+<view class="refresh-load" wx:if="{{downUp==2}}">------------某有咯-----------</view>
+<view class="fml-nullContent" wx:if="{{nullContent==0&&loading!=0}}">
+    <!-- <image src='../../images/cb.png'></image> -->
+    <view>暂无相关地址信息</view>
+</view>

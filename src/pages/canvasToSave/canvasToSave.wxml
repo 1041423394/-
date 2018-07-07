@@ -1,0 +1,23 @@
+<!--弹窗  -->
+<view class="fml-modal animated fadeInDown"></view>
+<view class="fml-dialog text-center animated slideInRight" >
+   <view class='fml-answer-bg' style='padding:0;border-radius:28rpx; '>
+    <image src='../../images/share.png' style='border-radius:28rpx;'></image>
+  </view>
+  <view class='answer-logo animated zoomIn'>
+    <image src="{{userInfo.avatarUrl}}"></image>
+  </view>
+  <view class='text-center answer-nickname animated zoomIn'>{{userInfo.nickName}}</view>
+  <view class='fml-result'>
+    <view class='result-content'>
+      <view class='result-title text-center'>wechat-frame</view>
+      <view class='result-name text-center'>Author：fengml</view>
+      <view class='result-info text-left'>读书明理做人不作秀，登科治国做事不做官</view>
+    </view> 
+  </view> 
+  <view class='fml-flex dialog-btn' style='justify-content:center;aligh-items:center'>
+    <view bindtap="saveHandle" class='handle-btn save-btn'>保存去炫耀</view>
+  </view>
+</view>
+<!--生成图片  -->
+ <canvas canvas-id="shareCanvas" style="width:354px;height:474px;position:fixed;top:9999px"></canvas> 

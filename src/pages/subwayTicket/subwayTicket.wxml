@@ -1,0 +1,36 @@
+<!--pages/selectAdress/selectAdress.wxml-->
+<view class="fml-select">
+  <view class="fml-address">
+    <view class="address-info">
+      <view class="fml-circle"></view>
+      <text>起点</text>
+    </view>
+    <view class="fml-adress" catchtap="showSearchList" data-index="0">{{startAddress}}</view>
+  </view>
+  <view class="fml-address">
+    <view class="address-info">
+      <view class="fml-circle circle-red"></view>
+      <text>终点</text>
+    </view>
+    <view class="fml-adress" catchtap="showSearchList" data-index="1">{{endAddress}}</view>
+  </view>
+</view>
+<view class="fml-select fml-info">
+  <view class="fml-num">
+    <view>张数</view>
+    <view class="num-box {{countShow ? 'color-show':'color-gray'}}">
+      <view class="num" catchtap="bindHandle" data-index="0">-</view>
+      <view class="num">{{count}}</view>
+      <view class="num" data-index="1" catchtap="bindHandle">+</view>
+    </view>
+  </view>
+  <view class="fml-num">
+    <view>应付金额</view>
+    <view class="money {{countShow ? '':'color-gray'}}"> ￥{{money}} </view>
+  </view>
+</view>
+<view class="fml-btn {{countShow ? 'fml-btn-info':''}}"  bindtap="bindSubmit"> 立即付款 </view>
+
+
+<import src="../../components/autoSelect/autoSelect.wxml" />
+<template is="autoSelect" data="{{...$fml.autoSelect}}" />

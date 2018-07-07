@@ -1,0 +1,89 @@
+<view class='fml-address border-t fml-padding'>
+  <form bindsubmit="confirmSave">
+    <view class='address-edit-info border-b  '>
+      <view class='address-input' bindtap='translate'>
+        <view name="receive_city">
+          <view class="fml-picker" wx:if="{{province}}" style='height:85rpx;line-height:85rpx;padding:0 10rpx'>
+            {{province}},{{city}},{{county}}
+          </view>
+          <view class="fml-picker" style='height:85rpx;line-height:85rpx;padding:0 10rpx' wx:elif="{{dataList.province}}">
+            {{dataList.province}},{{dataList.city}},{{dataList.district}}
+          </view>
+          <view class="fml-picker fml-placeHolder" style='height:85rpx;line-height:85rpx;padding:0 10rpx' wx:else>
+            省份，城市，区县
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class='address-edit-info border-b fml-flex' catchtap='getReceiveAddr'>
+      <view class='address-input fml-flex-1'>
+        <input disabled='true' name="receive_addr" value="{{receive_addr?receive_addr:dataList.address}}" placeholder-class='fml-placeHolder' placeholder='请输入小区大厦地标等关键字'></input>
+      </view>
+      <view class="fml-auto address-icon">
+        <!-- <image src='../../images/icon/icon-location-hover.png'></image> -->
+      </view>
+    </view>
+    
+    <view class='address-edit-info border-b fml-flex'>
+      <view class='address-input fml-flex-1'>
+        <input name="receive_extralAddr" value="{{dataList.building?dataList.building:''}}" placeholder-class='fml-placeHolder' placeholder='请输入门牌号' maxlength='50'></input>
+      </view>
+    </view>
+
+    <view class='address-edit-info border-b fml-flex'>
+      <view class='address-input fml-flex-1'>
+        <input type="text" placeholder="姓名" placeholder-class='fml-placeHolder' maxlength="10" name="receive_name" value="{{dataList.consignee?dataList.consignee:'' }}" />
+      </view>
+    </view>
+
+    <view class='address-edit-info border-b fml-flex'>
+      <view class='address-input fml-flex-1'>
+        <input type="number" placeholder="手机号码" placeholder-class='fml-placeHolder' maxlength='11' name="receive_mobile" value="{{dataList.mobile?dataList.mobile:'' }}" />
+      </view>
+    </view>
+    <view class="address-checkbox">
+      <checkbox-group bindchange="defaultChange">
+        <label wx:if="{{dataList && dataList.is_default==1}}">
+          <checkbox name="isdefault" value="1" style='transform:scale(.7)' checked="checked" />设为默认地址
+        </label>
+         <label wx:else>
+          <checkbox  name="isdefault" value="1" style='transform:scale(.7)'   />设为默认地址
+        </label>
+      </checkbox-group>
+    </view>
+    <button class='address-confirm' form-type='submit'>保存</button>
+  </form>
+  <view class="layer" hidden="{{show}}">
+    <view class="fml-modal animated {{classStyle}}" catchtap="hiddenFloatView"></view>
+    <view class="layer-wrap animated {{classStyle}}">
+      <view class="msg-head fml-flex fml-padding">
+        <view class="text-left" bindtap="hiddenFloatView"  style='height:88rpx;line-height:88rpx'>取消</view>
+        <view class="common-color text-right" bindtap="hiddenFloatView" style='height:88rpx;line-height:88rpx'>确定</view>
+      </view>
+
+      <picker-view class="picker-time" indicator-style="height: 50px;" style="width: 100%; height: 500rpx;" value="{{value}}" bindchange="bindChange">
+        <!--省-->
+        <picker-view-column>
+          <view wx:for="{{provinces}}" wx:for-item="sheng" style="line-height: 50px" wx:key="">
+            {{sheng.name}}
+          </view>
+        </picker-view-column>
+        <!--地级市-->
+        <picker-view-column>
+          <view wx:for="{{citys}}" style="line-height: 50px" wx:key="">
+            {{item.name}}
+          </view>
+        </picker-view-column>
+        <!--区县-->
+        <picker-view-column>
+          <view wx:for="{{countys}}" style="line-height: 50px" wx:key="">
+            {{item.name}}
+          </view>
+        </picker-view-column>
+      </picker-view>
+    </view>
+  </view>
+</view>
+<import src="../template/template.wxml" />
+<template is="tips" data="{{tips}}"></template>
