@@ -102,7 +102,7 @@ page {
 
 .goods-info .text-box .buy-num {
     width: 164rpx;
-    height: 48rpx;
+    /* height: 48rpx; */
     line-height: 48rpx;
     position: absolute;
     right: 30rpx;

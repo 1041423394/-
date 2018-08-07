@@ -7,7 +7,7 @@ let btnPos_x_min = 0
 let btnPos_x_max = 0
 let btnPos_y_min = 0
 let btnPos_y_max = 0
-let inButton = false //手指移动是否超过安全范围
+let moveStatus = false //手指移动是否超过安全范围
 
 Page({
     /**

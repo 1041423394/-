@@ -82,7 +82,20 @@ let getAddrList = function() {
     return obj
 }
 let deleteAddr = function() {
-    return true
+        return true
+    }
+    // 任务
+let getMyTask = function() {
+        let result = { "code": "200", "msg": "操作成功", "data": [{ "id": 0, "date": "2018-08-06", "note": "(每日一句) The dress doesn't fit her. She is too thin.", "diffDay": 0 }, { "id": 0, "date": "2018-08-06", "note": "小战士，留学之门开启，小纪老师为你加油", "diffDay": 0 }, { "id": 0, "date": "2018-08-06", "note": "了解一下时间规划，可以自己添加任务哦", "diffDay": 0 }] }
+        let obj = { data: result }
+        return obj
+    }
+    // 获取月数据
+let monthData = function() {
+    let result = { "code": "200", "msg": "操作成功", "data": [{ "id": "2452", "pid": "2451", "uid": "100000073", "sid": "83", "time_node": "2", "len": "3", "note": "俄文", "is_notice": "1", "child_page": "", "status": "0", "date": "2018-08-02", "year": 2018, "month": "08", "day": "2" }] }
+    let obj = { data: result }
+
+    return obj
 }
 
 
@@ -98,5 +111,7 @@ module.exports = {
     confirmOrder: confirmOrder,
     confirmAddr: confirmAddr,
     getAddrList: getAddrList,
-    deleteAddr: deleteAddr
+    deleteAddr: deleteAddr,
+    getMyTask: getMyTask,
+    monthData: monthData
 }

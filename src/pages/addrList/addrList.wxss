@@ -71,3 +71,7 @@ page {
 .balance-btn {
     color: #F4A44D;
 }
+
+.list-touch {
+    transition: margin-left 0.2s ease-in-out;
+}

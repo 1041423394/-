@@ -13,7 +13,9 @@
         "pages/uploadOss/uploadOss",
         "pages/timeSlot/timeSlot",
         "pages/switchCity/switchCity",
-        "pages/addrEdit/addrEdit"
+        "pages/addrEdit/addrEdit",
+        "pages/calendar/calendar"
+
 
     ],
     "window": {

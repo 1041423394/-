@@ -1,11 +1,4 @@
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-} 
+
 .fml-autoSelect{
   position: fixed;
   background: #eef1f9;
@@ -19,6 +12,7 @@
   height:124rpx;
   border-bottom:1rpx solid #dcdcdc;
   position: relative;
+ 
 }
 .searchInput{
   background:white;

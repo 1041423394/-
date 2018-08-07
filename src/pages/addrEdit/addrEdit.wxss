@@ -35,3 +35,12 @@
     height: 45rpx;
     margin-left: 5rpx;
 }
+
+.layer-wrap {
+    z-index: 3;
+    position: relative;
+    z-index: 4;
+    background: #fff;
+    padding: 0 32rpx;
+    box-sizing: border-box;
+}

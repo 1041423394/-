@@ -9,7 +9,7 @@ var btnPos_x_min = 0;
 var btnPos_x_max = 0;
 var btnPos_y_min = 0;
 var btnPos_y_max = 0;
-var inButton = false; //手指移动是否超过安全范围
+var moveStatus = false; //手指移动是否超过安全范围
 
 Page({
     /**

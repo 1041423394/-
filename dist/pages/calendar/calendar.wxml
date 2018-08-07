@@ -1,0 +1,44 @@
+<import src="../template/template.wxml" />
+<template is="tab" data="{{tab,state}}"></template>
+<import src="../../template/calendar/index.wxml" />
+<view class="calendar-wrap">
+    <template is="calendar" data="{{...calendar,weekView,state,plan,colorText}}" />
+</view>
+
+<view class="fml-nullContent" wx:if="{{nullContent==0&&state==0}}" style="top:400rpx">
+        <image src="../../images/noimg.png" />
+    <view class="success-color">快来生成你的留学规划吧！</view>
+</view>
+   <template is="task" data="{{left,state,timeList}}"></template>
+
+<view class="fml-modal animated fadeInDown" wx:if="{{show}}" bindtap="cancelHandle"></view>
+<view class="fml-show-word animated fadeInDown" wx:if="{{show}}">
+    <view class="task-list show-modal-task hidden">
+        <view class="task-touch fml-flex" wx:if="{{timeList.length>0}}" wx:for="{{timeList}}" wx:key="item" wx:for-index="index">
+            <view class="fml-flex" bindtouchstart="touchS" bindtouchmove="touchM" data-state="future" data-id="{{item.id}}" data-index="{{index}}" bindtouchend="touchE" style="{{item.left}}">
+                <view class="task-result fml-flex" >
+                    <view class="fml-checkbox-icon">
+                        <i class="checked-icon"></i>
+                    </view>
+                    <view class="jdmall-checkbox-text fml-pad24 ellipsis fml-flex-1 fail-color">
+                        {{item.note}}
+                    </view>
+                    <view class="text-color small-size fml-auto" wx:if="{{item.diffDay!=0}}">
+                        剩余{{item.diffDay}}天
+                    </view>
+                </view>
+                <view class="task-handle fml-flex" data-state="future" data-taskid="{{item.id}}" data-index="{{index}}" catchtap="delTask">
+                    <view class="warn-bg fml-flex">
+                        <image src="../../images/icon/del.png" />
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{timeList.length==0}}">
+            <view class="fml-nullContent" style="top:90rpx">
+                <view class="success-color">当月暂无计划</view>
+            </view>
+        </view>
+    </view>
+    <view class="show-btn" bindtap="cancelHandle">知道了</view>
+</view>

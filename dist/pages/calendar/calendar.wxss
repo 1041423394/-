@@ -1,0 +1,87 @@
+@import '../../template/calendar/index.wxss';
+.calendar-wrap {
+    padding: 0 10rpx;
+    margin-top: 13rpx;
+    /* height: 100vh; */
+}
+
+.calendar-list {
+    background: #fff;
+}
+
+.calendar-box {
+    padding: 29rpx 0;
+}
+
+.calendar-img {
+    width: 220rpx;
+    height: 150rpx;
+    margin-right: 34rpx;
+}
+
+.text-content {
+    margin-bottom: 26rpx;
+    color: #000;
+    line-height: 48rpx;
+}
+
+.calendar-text text {
+    margin-right: 24rpx;
+}
+
+.calendar-list:last-child .calendar-box {
+    border: none
+}
+
+.fml-show-word {
+    width: 560rpx;
+    /* padding: 32rpx; */
+    line-height: 40rpx;
+    font-size: 28rpx;
+    color: #565D65;
+    height: 520rpx;
+    overflow-y: auto;
+    position: fixed;
+    top: 230rpx;
+    left: 50%;
+    margin-left: -275rpx;
+    z-index: 2;
+    background: #fff;
+    border-radius: 8rpx;
+    overflow: hidden;
+}
+
+.show-modal-task {
+    height: 470rpx;
+    overflow-y: auto;
+}
+
+.show-btn {
+    margin-top: 32rpx;
+    width: 340rpx;
+    height: 88rpx;
+    color: #fff;
+    background: #425DA9;
+    border-radius: 8rpx;
+    text-align: center;
+    line-height: 88rpx;
+    position: absolute;
+    bottom: 32rpx;
+    left: 50%;
+    margin-left: -170rpx;
+}
+
+.handle-time {
+    background: #EBEFF3;
+    text-align: center;
+}
+
+.month-picker {
+    width: 300rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+}
+
+.modal-detail {
+    background: #fff
+}

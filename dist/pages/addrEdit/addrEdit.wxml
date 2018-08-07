@@ -1,5 +1,5 @@
-<view class='fml-address border-t fml-padding'>
-  <form bindsubmit="confirmSave">
+<view class='fml-address border-t '>
+  <form bindsubmit="confirmSave" class="fml-padding">
     <view class='address-edit-info border-b  '>
       <view class='address-input' bindtap='translate'>
         <view name="receive_city">
@@ -57,7 +57,7 @@
   <view class="layer" hidden="{{show}}">
     <view class="fml-modal animated {{classStyle}}" catchtap="hiddenFloatView"></view>
     <view class="layer-wrap animated {{classStyle}}">
-      <view class="msg-head fml-flex fml-padding">
+      <view class="msg-head fml-flex fml-padding border-b">
         <view class="text-left" bindtap="hiddenFloatView"  style='height:88rpx;line-height:88rpx'>取消</view>
         <view class="common-color text-right" bindtap="hiddenFloatView" style='height:88rpx;line-height:88rpx'>确定</view>
       </view>

@@ -1,5 +1,15 @@
 let app = getApp()
 var common = {
+    // 弹窗
+    showModal(content) {
+        let wxShowModal = app.wxPromisify(wx.showModal)
+        wxShowModal({
+            title: app.globalData.projectName,
+            content: content,
+            showCancel: false,
+            confirmText: '好的'
+        })
+    },
     // 获取当前位置
     getLocation() {
         let wxGetLocation = this.wxPromisify(wx.getLocation)
@@ -156,6 +166,26 @@ var common = {
                 booking_time_hidden: true
             })
         }, timer)
+    },
+    formatTime: function(date) {
+        // + ' ' + [hour, minute, second].map(formatNumber).join(':')
+        const year = date.getFullYear()
+        const month = date.getMonth() + 1
+        const day = date.getDate()
+            // const hour = date.getHours()
+            // const minute = date.getMinutes()
+            // const second = date.getSeconds()
+
+        return [year, month, day].map(common.formatNumber).join('-')
+    },
+
+    formatNumber: function(n) {
+        n = n.toString()
+        return n[1] ? n : '0' + n
+    },
+    compareTime: function(nowD, otherD) {
+        return ((new Date(nowD.replace(/-/g, "\/"))) > (new Date(otherD.replace(/-/g, "\/"))));
     }
+
 }
 module.exports = common

@@ -16,3 +16,43 @@
 <template name="tips">
     <view hidden="{{tips.hiddenErrmsg}}" class="empty prompt">{{tips.errmsg}}</view>
 </template>
+<!-- tab -->
+<template name="tab">
+    <view class="fml-tab fml-flex info-color {{fixed?'fml-fixed border-db':''}}">
+        <view class="tab-default {{state==index?'info-bg':''}}" wx:for="{{tab}}" wx:key="item" wx:for-index="index" data-state="{{index}}" bindtap="tabHandle">
+            {{item}}
+        </view>
+    </view>
+</template>
+<!-- 任务 -->
+<template name="task">
+    <view class="fml-task">
+        <view class="task-box">
+            <view class="fml-recent" hidden="{{state==1}}">
+                <view class="task-list" wx:if="{{timeList.length>0}}">
+                    <view class="task-status small-size success-color">今天</view>
+                     <view class="task-touch fml-flex" wx:for="{{timeList}}" wx:key="item">
+                        <view class="fml-flex fml-touch" bindtouchstart="touchS" bindtouchmove="touchM" data-id="{{item.id}}" data-index="{{index}}" bindtouchend="touchE">
+                            <view class="task-result fml-flex" style="{{item.left}}">
+                                <view class="fml-checkbox-icon">
+                                    <i class="checked-icon"></i>
+                                </view>
+                                <view class="jdmall-checkbox-text fml-pad24 ellipsis fml-flex-1 warn-color tr" style="{{item.color?'color:'+item.color:''}}">
+                                    {{item.note}}
+                                </view>
+                                <view class="text-color small-size fml-auto" wx:if="{{item.diffDay!=0}}">
+                                    剩余{{item.diffDay}}天
+                                </view>
+                            </view>
+                            <view class="task-handle fml-flex" data-taskid="{{item.id}}" data-index="{{index}}" catchtap="delTask">
+                                <view class="warn-bg fml-flex">
+                                    <image src="../../images/icon/del.png" />
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

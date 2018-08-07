@@ -5,7 +5,7 @@
 </view>
 <view class="fml-myAddress" style="padding-bottom:150rpx" wx:if="{{nullContent!=0&&loading!=0}}">
     <view class="myAddress-list  border-b hidden" wx:for="{{dataList}}" wx:key="item" data-index="{{index}}" data-id="{{item.id}}" bindtap='getAddress'>
-        <view class="fml-flex " bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}"  data-id="{{item.goodsId}}"  style="{{item.left}}">
+        <view class="fml-flex list-touch" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}"  data-id="{{item.goodsId}}"  style="{{item.left}}">
             <view class="fml-flex fml-padding">
                 <view class="list-left">
                     <view class="list-name ellipsis">{{item.consignee}}</view>

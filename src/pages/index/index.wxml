@@ -51,5 +51,9 @@
       <icon type="download" size="30" color="#79d2d6" class="animated zoomIn"/>
       <span>地铁购票</span>
     </view>
+    <view class="fml-index fml-flex-cloumn" bindtap="tapHandle" data-src="calendar">
+      <icon type="download" size="30" color="#79d2d6" class="animated zoomIn"/>
+      <span>日历</span>
+    </view>
   </view>
 </view>
